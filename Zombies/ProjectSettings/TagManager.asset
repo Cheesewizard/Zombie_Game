@@ -44,3 +44,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 2217357453
+    locked: 0
+  - name: Foliage
+    uniqueID: 2840982933
+    locked: 0
+  - name: Objects
+    uniqueID: 246473569
+    locked: 0
+  - name: Zombies
+    uniqueID: 2370987523
+    locked: 0
+  - name: Bullets
+    uniqueID: 4230832765
+    locked: 0
+  - name: Player
+    uniqueID: 240708111
+    locked: 0

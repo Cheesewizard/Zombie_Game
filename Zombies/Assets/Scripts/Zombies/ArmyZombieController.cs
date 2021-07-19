@@ -25,6 +25,9 @@ public class ArmyZombieController : MonoBehaviour, IKillable, IDamageable<float>
     {
         // This uses a state behaviour within the animator that deletes the gameObject after the death animation.
         animator.SetTrigger("Death");
+        gameObject.GetComponent<MoveToPlayer>().enabled = false;
+        gameObject.GetComponent<ArmyZombieController>().enabled = false;
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
     }
 
     public void TakeDamage(float damageTaken)
