@@ -6,6 +6,7 @@ public class StandardZombieController : MonoBehaviour, IKillable, IDamageable<fl
 {
     public float health = 50;
     public float attack = 10;
+    public float knockback = 0.5f;
 
     private Animator animator;
 
@@ -40,12 +41,19 @@ public class StandardZombieController : MonoBehaviour, IKillable, IDamageable<fl
         }
     }
 
+    public void TakeKnockBack(float force)
+    {
+        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(gameObject.transform.position.x * force, gameObject.transform.position.y * force), ForceMode2D.Impulse);
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Melee"))
         {
             var weapon = collision.gameObject.GetComponent<IWeapon>();
             this.TakeDamage(weapon.GetDamage());
+            this.TakeKnockBack(weapon.GetKnockback());
 
             // Destroy bullet upon hit regardless
             Destroy(collision.gameObject);
@@ -66,5 +74,10 @@ public class StandardZombieController : MonoBehaviour, IKillable, IDamageable<fl
     public int GetAmmo()
     {
         throw new System.NotImplementedException();
+    }
+
+    public float GetKnockback()
+    {
+        return this.knockback;
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 54579111322792987}
   - component: {fileID: 8563117649180934383}
   - component: {fileID: -3770379093921850714}
+  - component: {fileID: 6738409102726999761}
   m_Layer: 0
   m_Name: GunBullet
   m_TagString: Bullet
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd72dee50760384484be0f5e9b3cac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 300
+  bulletSpeed: 150
 --- !u!114 &54579111322792987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b6f27a035d33847aa02c9c8f642245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 60
+  damage: 15
+  knockBack: 3
 --- !u!61 &-3770379093921850714
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,3 +152,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6738409102726999761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7546822337550260109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d779b90647584844584b0f8cd11282e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloods:
+  - {fileID: 7919374434142102032, guid: 28d23640ac19feb49867fea714631cd5, type: 3}

@@ -19,6 +19,6 @@ public class MoveToPlayer : MonoBehaviour
     {
         gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         gameObject.transform.LookAt(player.transform);
-        gameObject.transform.Rotate(0, 90, 0);
+        gameObject.transform.Rotate(0, 90, -90);
     }
 }

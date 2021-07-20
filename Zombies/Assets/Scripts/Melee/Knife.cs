@@ -16,6 +16,11 @@ public class Knife : MonoBehaviour, IWeapon
         return this.Damage;
     }
 
+    public float GetKnockback()
+    {
+        throw new System.NotImplementedException();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

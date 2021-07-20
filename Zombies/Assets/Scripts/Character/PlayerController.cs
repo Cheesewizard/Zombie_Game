@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable<float>
     {
         animator = gameObject.GetComponent<Animator>();
         meleeHitBox = gameObject.GetComponentInChildren<BoxCollider2D>();
+        //Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -97,5 +98,10 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable<float>
             this.TakeDamage(attack.GetDamage());
             Debug.Log($"Player health = {health}");
         }
+    }
+
+    public void TakeKnockBack(float Knockback)
+    {
+        throw new System.NotImplementedException();
     }
 }
