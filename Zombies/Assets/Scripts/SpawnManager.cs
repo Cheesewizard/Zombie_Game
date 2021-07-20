@@ -31,8 +31,8 @@ public class SpawnManager : MonoBehaviour
 
     private void CreateZombieAtRandomPosition()
     {
-        var index = Random.Range(0, 1);
-        Instantiate(zombies[0], GetRandomPosition(), zombies[0].transform.rotation);
+        var index = Random.Range(0, 2);
+        Instantiate(zombies[index], GetRandomPosition(), zombies[index].transform.rotation);
     }
 
     private Vector2 GetRandomPosition()

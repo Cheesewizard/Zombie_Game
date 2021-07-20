@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmyZombieController : MonoBehaviour, IKillable, IDamageable<float>, IWeapon
+public class StandardZombieController : MonoBehaviour, IKillable, IDamageable<float>, IWeapon
 {
     public float health = 50;
     public float attack = 10;
@@ -26,8 +26,9 @@ public class ArmyZombieController : MonoBehaviour, IKillable, IDamageable<float>
         // This uses a state behaviour within the animator that deletes the gameObject after the death animation.
         animator.SetTrigger("Death");
         gameObject.GetComponent<MoveToPlayer>().enabled = false;
-        gameObject.GetComponent<ArmyZombieController>().enabled = false;
+        gameObject.GetComponent<StandardZombieController>().enabled = false;
         gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
 
     public void TakeDamage(float damageTaken)
