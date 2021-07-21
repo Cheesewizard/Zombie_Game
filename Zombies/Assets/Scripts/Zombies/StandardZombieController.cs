@@ -61,7 +61,7 @@ public class StandardZombieController : MonoBehaviour, IKillable, IDamageable<fl
         else if (collision.gameObject.CompareTag("Player"))
         {
             animator.SetTrigger("Attack");
-            var player = collision.gameObject.GetComponent<IDamageable>();
+            var player = collision.gameObject.GetComponent<IDamageable<float>>();
             //player.GetDamage(attack);
         }
     }

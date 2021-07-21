@@ -6,7 +6,8 @@ public class MoveToPlayer : MonoBehaviour
 {
 
     private GameObject player;
-    public float moveSpeed = 5f;
+    private GameObject zombie;
+    public float moveSpeed = 0.5f;
 
     // Start is called before the first frame update
     void Start()
