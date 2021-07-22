@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4181330336006289354}
   - component: {fileID: -8671561987519865699}
   - component: {fileID: 5970430947804356793}
+  - component: {fileID: -2361718491341741428}
   m_Layer: 0
   m_Name: Army_Zombie
   m_TagString: Zombie
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1923979773
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 7bb4871139e35844f819110ae10f40da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -324,3 +325,17 @@ PolygonCollider2D:
       - {x: -0.41895604, y: -0.49725276}
       - {x: -0.42994505, y: -0.4258242}
       - {x: -0.39423078, y: -0.50549453}
+--- !u!114 &-2361718491341741428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4181330336006289356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d779b90647584844584b0f8cd11282e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloods:
+  - {fileID: 440818023100699585, guid: 9994e9536951f354fb340fdb5492c3ef, type: 3}

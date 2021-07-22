@@ -18,13 +18,11 @@ public class SpawnBloodEffect : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void SpawnBlood(Transform position) 
     {
-        if (collision.gameObject.CompareTag("Zombie"))
-        {
-            var blood = Instantiate(bloods[0], gameObject.transform.position, Quaternion.identity);
-            blood.transform.SetParent(collision.transform);
-            Destroy(bloods[0], bloods[0].main.duration);
-        }
+            var blood = bloods[0];
+            blood.transform.SetParent(gameObject.transform.parent.transform);
+            Instantiate(blood, gameObject.transform.parent.transform.position, gameObject.transform.rotation);
+            Destroy(blood, blood.main.duration);
     }
 }

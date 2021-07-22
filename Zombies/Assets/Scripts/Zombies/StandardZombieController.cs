@@ -51,6 +51,9 @@ public class StandardZombieController : MonoBehaviour, IKillable, IDamageable<fl
     {
         if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Melee"))
         {
+            var bloodSpawn = gameObject.GetComponent<SpawnBloodEffect>();
+            bloodSpawn.SpawnBlood(collision.gameObject.transform);
+
             var weapon = collision.gameObject.GetComponent<IWeapon>();
             this.TakeDamage(weapon.GetDamage());
             this.TakeKnockBack(weapon.GetKnockback());
