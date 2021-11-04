@@ -7,6 +7,7 @@ public class SpawnBloodEffect : MonoBehaviour
     // Start is called before the first frame update
 
     public ParticleSystem[] bloods;
+    public float spawmOffset = 10f;
     void Start()
     {
 
@@ -18,11 +19,9 @@ public class SpawnBloodEffect : MonoBehaviour
 
     }
 
-    public void SpawnBlood(Transform position) 
+    public void SpawnBlood(Transform position)
     {
-            var blood = bloods[0];
-            blood.transform.SetParent(gameObject.transform.parent.transform);
-            Instantiate(blood, gameObject.transform.parent.transform.position, gameObject.transform.rotation);
-            Destroy(blood, blood.main.duration);
+        bloods[0].transform.rotation = position.transform.rotation;
+        bloods[0].Play();
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBullet : MonoBehaviour
+public class MoveBullet : MonoBehaviour
 {
     public float bulletSpeed = 20.0f;
 

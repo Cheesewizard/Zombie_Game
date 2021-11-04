@@ -16,6 +16,6 @@ public class FollowPlayer : MonoBehaviour
     private void LateUpdate()
     {
         // update position
-        Camera.main.transform.position = new Vector3(target.position.x, target.position.y, -1);
+        Camera.main.transform.position = new Vector3(target.position.x, target.position.y, -10);
     }
 }

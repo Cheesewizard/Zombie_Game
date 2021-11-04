@@ -1,4 +1,7 @@
-public interface IKillable
+namespace Assets.Scripts.Interfaces
 {
-    void Kill();
+    public interface IKillable
+    {
+        void Kill();
+    }
 }

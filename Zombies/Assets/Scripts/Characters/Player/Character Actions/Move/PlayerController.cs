@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IKillable, IDamageable<float>
+public class PlayerController : MonoBehaviour, IKillable, IDamageable, IPlayer
 {
     public Camera targetCamera;
     public GameObject bullet;
@@ -12,30 +11,57 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable<float>
 
     public float movementSpeed = 20;
     public float health = 150;
+    public bool godMode = true;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
         meleeHitBox = gameObject.GetComponentInChildren<BoxCollider2D>();
-        //Cursor.visible = false;
+        //Cursor.visible = false; // maybe remove. COuld add laser site as an item further into the game
     }
 
     // Update is called once per frame
     void Update()
     {
         LookAtMouse();
-        MoveCharacterTransform();
-        CheckFiregun();
+        MoveCharacter();
+        UseWeapon();
         CheckMeleeAttack();
     }
 
-    private void CheckFiregun()
+    private void UseWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetTrigger("IsGunShot");
             Instantiate(bullet, bulletSpawner.transform.position, bulletSpawner.transform.rotation);
+
+            var playerLayer = 9;
+             int layerMask = ~(1 << playerLayer); //Exclude layer 9
+            RaycastHit2D hit = Physics2D.Raycast(bulletSpawner.transform.position, bulletSpawner.transform.position, Mathf.Infinity, layerMask);
+            if (hit.collider != null)
+            {
+                var damageable = hit.collider.gameObject.GetComponentInParent<IDamageable>();
+                if (damageable != null)
+                {
+                    var bloodSpawn = hit.collider.gameObject.GetComponent<SpawnBloodEffect>();
+                    if (bloodSpawn != null)
+                    {
+                        bloodSpawn.SpawnBlood(hit.collider.transform);
+                    }
+
+                    // Must be damageable
+                    var weapon = bullet.GetComponent<IWeapon>(); // Change this once I add another gun to use a weapon system
+                    damageable.TakeDamage(weapon);
+
+                    var knockBack = hit.collider.gameObject.GetComponent<IKnockbackable<GameObject>>();
+                    if (knockBack != null)
+                    {
+                        knockBack.TakeKnockBack(hit.collider.gameObject, weapon.GetKnockback());
+                    }
+                }
+            }
         }
     }
 
@@ -48,7 +74,7 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable<float>
         }
     }
 
-    private void MoveCharacterTransform()
+    private void MoveCharacter()
     {
         // Gets player input
         var horizontalInput = Input.GetAxis("Horizontal");
@@ -58,7 +84,7 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable<float>
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput + verticalInput));
 
         if (Input.GetButton("Vertical"))
-        { 
+        {
             transform.Translate(0, verticalInput * movementSpeed * Time.deltaTime, 0, Space.World);
         }
 
@@ -80,12 +106,15 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable<float>
         // This uses a state behaviour within the animator that deletes the gameObject after the death animation.
         animator.SetTrigger("Death");
     }
-    public void TakeDamage(float damageTaken)
+    public void TakeDamage(IWeapon weapon)
     {
-        this.health -= damageTaken;
-        if (this.health <= 0)
+        if (!godMode)
         {
-            Kill();
+            this.health -= weapon.GetDamage();
+            if (this.health <= 0)
+            {
+                Kill();
+            }
         }
     }
 
@@ -94,13 +123,19 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable<float>
     {
         if (collision.gameObject.CompareTag("Zombie"))
         {
-            var attack = collision.gameObject.GetComponent<IWeapon>();
-            this.TakeDamage(attack.GetDamage());
+            var attack = collision.gameObject.GetComponent<IZombie>();
+            //this.TakeDamage(attack.GetDamage());
             Debug.Log($"Player health = {health}");
         }
     }
 
-    public void TakeKnockBack(float Knockback)
+
+    public float GetHealth()
+    {
+        return this.health;
+    }
+
+    public void TakeKnockBack(GameObject other, float force)
     {
         throw new System.NotImplementedException();
     }

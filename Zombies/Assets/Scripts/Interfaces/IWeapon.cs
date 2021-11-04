@@ -1,6 +1,9 @@
-public interface IWeapon
+namespace Assets.Scripts.Interfaces
 {
-    float GetDamage();
-    int GetAmmo();
-    float GetKnockback();
+    public interface IWeapon
+    {
+        float GetDamage();
+        int GetAmmo();
+        float GetKnockback();
+    }
 }

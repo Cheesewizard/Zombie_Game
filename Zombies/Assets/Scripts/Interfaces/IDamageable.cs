@@ -1,5 +1,7 @@
-public interface IDamageable <T>
+namespace Assets.Scripts.Interfaces
 {
-    void TakeDamage(T damageTaken);
-    void TakeKnockBack(float Knockback);
+    public interface IDamageable
+    {
+        void TakeDamage(IWeapon weapon);
+    }
 }
