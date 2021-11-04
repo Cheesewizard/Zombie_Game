@@ -1,4 +1,5 @@
 Personal project to learn Unity more in depth.
+![Zombie Game](https://user-images.githubusercontent.com/9462056/140250841-b2a18b15-59c3-4a70-8bab-b171ca25ebcd.jpg)
 
 Small video on current progress.
 
