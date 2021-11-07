@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable, IPlayer
     public float health = 150;
     public bool godMode = true;
 
+    public InventoryObject inventory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,21 +36,25 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable, IPlayer
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            animator.SetTrigger("IsGunShot");
+            // Check current weapon
+            animator.SetTrigger("IsPistolAttack");
             Instantiate(bullet, bulletSpawner.transform.position, bulletSpawner.transform.rotation);
 
             var playerLayer = 9;
-             int layerMask = ~(1 << playerLayer); //Exclude layer 9
-            RaycastHit2D hit = Physics2D.Raycast(bulletSpawner.transform.position, bulletSpawner.transform.position, Mathf.Infinity, layerMask);
+            int layerMask = ~(1 << playerLayer); //Exclude layer 9
+            RaycastHit2D hit = Physics2D.Raycast(bulletSpawner.transform.position, -transform.up, Mathf.Infinity, layerMask);
             if (hit.collider != null)
             {
+                print("Hit");
+                Debug.DrawRay(bulletSpawner.transform.position, -transform.up, Color.red, 10);
+
                 var damageable = hit.collider.gameObject.GetComponentInParent<IDamageable>();
                 if (damageable != null)
                 {
-                    var bloodSpawn = hit.collider.gameObject.GetComponent<SpawnBloodEffect>();
+                    var bloodSpawn = hit.collider.gameObject.GetComponentInParent<SpawnBloodEffect>();
                     if (bloodSpawn != null)
                     {
-                        bloodSpawn.SpawnBlood(hit.collider.transform);
+                        bloodSpawn.SpawnBlood(hit.collider.gameObject.transform);
                     }
 
                     // Must be damageable
@@ -101,7 +107,7 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable, IPlayer
         gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, perpendicular);
     }
 
-    public void Kill()
+    public void KillSelf()
     {
         // This uses a state behaviour within the animator that deletes the gameObject after the death animation.
         animator.SetTrigger("Death");
@@ -111,9 +117,10 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable, IPlayer
         if (!godMode)
         {
             this.health -= weapon.GetDamage();
+            Debug.Log($"Player health = {health}");
             if (this.health <= 0)
             {
-                Kill();
+                KillSelf();
             }
         }
     }
@@ -124,9 +131,23 @@ public class PlayerController : MonoBehaviour, IKillable, IDamageable, IPlayer
         if (collision.gameObject.CompareTag("Zombie"))
         {
             var attack = collision.gameObject.GetComponent<IZombie>();
-            //this.TakeDamage(attack.GetDamage());
-            Debug.Log($"Player health = {health}");
+            //this.TakeDamage(attack.GetDamage());        
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var item = collision.GetComponent<Item>();
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        inventory.container.Clear();
     }
 
 

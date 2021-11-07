@@ -7,17 +7,7 @@ public class SpawnBloodEffect : MonoBehaviour
     // Start is called before the first frame update
 
     public ParticleSystem[] bloods;
-    public float spawmOffset = 10f;
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public float spawnOffset = 10f;
 
     public void SpawnBlood(Transform position)
     {

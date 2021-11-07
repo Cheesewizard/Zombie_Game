@@ -21,20 +21,35 @@ public class StandardZombieController : MonoBehaviour, IKillable, IDamageable, I
 
     }
 
-    public void Kill()
+    public void KillSelf()
     {
-        // This uses a state behaviour within the animator that deletes the gameObject after the death animation.
-        animator.SetTrigger("Death");
+        if (animator.GetBool("Die") == false)
+        {
+            // This uses a state behaviour within the animator that deletes the gameObject after the death animation.
+            animator.SetBool("Die", true);
+            DisableZopmbieScripts();
+        }
+    }
+
+    // May not keep in, I just like seeing the dead Zombies on the ground.
+    public void DisableZopmbieScripts()
+    {
         gameObject.GetComponent<MoveToPlayer>().enabled = false;
         gameObject.GetComponent<StandardZombieController>().enabled = false;
-        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        var collider = gameObject.GetComponentsInChildren<BoxCollider2D>();
-        foreach (var child in collider)
-        {
-            child.enabled = false;
-        }
 
+        DeathKnockback();
         gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        gameObject.GetComponent<SpawnBloodEffect>().enabled = false;
+        gameObject.transform.Rotate(transform.position, Random.Range(0, 360), Space.Self);
+    }
+
+    private void DeathKnockback()
+    {
+        var rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.AddForce(-transform.position * 200, ForceMode2D.Impulse);
+        rb.drag = 2;
+      
+        rb.bodyType = RigidbodyType2D.Static;
     }
 
     public void TakeDamage(IWeapon weapon)
@@ -42,7 +57,7 @@ public class StandardZombieController : MonoBehaviour, IKillable, IDamageable, I
         this.health -= weapon.GetDamage();
         if (this.health <= 0)
         {
-            Kill();
+            KillSelf();
         }
     }
 
