@@ -17,9 +17,10 @@ New animated hitboxes for the zombies allowing for more accurate triggers. Indiv
 <br /><br /><br />
 
 **Old progress**
-
+<br /><br />
 
 **Progress 2**
+
 Messing around with terrain generation, currently very basic, includes sideways walking Zombies
 
 ![ezgif com-gif-maker (7)](https://user-images.githubusercontent.com/9462056/148991504-ce414573-f308-4649-943d-21fd471d7d0a.gif)
