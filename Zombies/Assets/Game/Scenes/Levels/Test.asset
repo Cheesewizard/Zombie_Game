@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776a372f3af80954ea8712b96b44723d, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  scenes:
+  - sceneAsset: {fileID: 102900000, guid: 55dce1a1c44864d4f83db5528cf21ed6, type: 3}
+    scenePath: Game/Scenes/Levels/Test_Art
+  - sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+    scenePath: Game/Scenes/Levels/Test_Logic
+  - sceneAsset: {fileID: 102900000, guid: 703e5bc6dc879504ebc16ed08aff7203, type: 3}
+    scenePath: Game/Scenes/Levels/Test_Audio

@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6909414891816765222
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652580576328214495, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723536309883213526, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a61af67f50c43354e835b79f4d96d1bc, type: 3}
+    - target: {fileID: 3929331707256302755, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_Name
+      value: Cop_Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358839569182733849, guid: 66740ba44435db641b46064c574105e3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: a82596ce516c2ba4289c12413a58b52f, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 66740ba44435db641b46064c574105e3, type: 3}

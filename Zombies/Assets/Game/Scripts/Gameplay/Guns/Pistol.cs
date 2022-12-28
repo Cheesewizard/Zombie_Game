@@ -8,11 +8,11 @@ namespace Game.Scripts.Gameplay.Guns
     {
         [Inject]
         private PlayerInputConsumerAccessService playerInput;
-        
+
         private void Start()
         {
             base.Init(gunConfig);
-          //  playerInput.playerInput.Player.Shoot.performed += HandleShootGun;
+            playerInput.playerInput.Player.Shoot.performed += HandleShootGun;
         }
 
         private void HandleShootGun(InputAction.CallbackContext context)

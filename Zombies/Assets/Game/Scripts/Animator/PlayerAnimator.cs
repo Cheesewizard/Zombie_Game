@@ -1,25 +1,27 @@
 using Game.Scripts.Characters.Player;
 using Game.Scripts.Gameplay.Guns;
+using Quack.ReferenceMagic.Runtime;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Scripts.Animator
 {
     public class PlayerAnimator : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField, Required, Find(Destination.Self)]
         private UnityEngine.Animator animator;
 
-        [SerializeField] 
+        [SerializeField, Required, Find(Destination.AllChildren)]
         private Gun gun;
-        
-        [SerializeField] 
-        private PlayerController playerController;
+
+        [SerializeField, Required, Find(Destination.AllChildren)]
+        private PlayerLogic playerLogic;
 
         private void Awake()
         {
-         //   gun.OnShoot += HandleShootAnimation;
-            playerController.OnMovement += HandleMovementAnimation;
-            playerController.OnKilled += HandleDeathAnimation;
+            gun.OnShoot += HandleShootAnimation;
+            playerLogic.OnMovement += HandleMovementAnimation;
+            playerLogic.OnKilled += HandleDeathAnimation;
         }
 
         private void HandleShootAnimation(GunConfig gunConfig)
@@ -32,9 +34,9 @@ namespace Game.Scripts.Animator
             animator.SetTrigger("IsKnifeAttack");
         }
 
-        private void HandleMovementAnimation(Vector2 movement)
+        private void HandleMovementAnimation(bool isWalking)
         {
-            animator.SetFloat("Speed", Mathf.Max(Mathf.Abs(movement.x), Mathf.Abs(movement.y)));
+            animator.SetBool("IsWalking", isWalking);
         }
 
         private void HandleDeathAnimation()
@@ -45,9 +47,9 @@ namespace Game.Scripts.Animator
 
         private void OnDestroy()
         {
-          //  gun.OnShoot -= HandleShootAnimation;
-            playerController.OnMovement -= HandleMovementAnimation;
-            playerController.OnKilled -= HandleDeathAnimation;
+            gun.OnShoot -= HandleShootAnimation;
+            playerLogic.OnMovement -= HandleMovementAnimation;
+            playerLogic.OnKilled -= HandleDeathAnimation;
         }
     }
 }

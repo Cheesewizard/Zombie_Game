@@ -44,7 +44,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0",
-   "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-    "com.kkjamie.unity-dependency-injection": "https://github.com/kkjamie/unity-dependency-injection.git#1.3.0"
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.kkjamie.unity-dependency-injection": "https://github.com/kkjamie/unity-dependency-injection.git#1.3.0",
+	"com.xrgames.quack.utils": "git+https://dev.azure.com/xrgames/Quack/_git/quack-utils#4ff2f7631c07be0d03cab4274711b1612ac27a39",
+	"com.xrgames.quack.scene-magic": "git+https://dev.azure.com/xrgames/Quack/_git/scene-magic#a1c5dbe1c1fc61caa5516d753d1f9755e6ee839f",
+	"com.xrgames.quack.reference-magic": "git+https://dev.azure.com/xrgames/Quack/_git/reference-magic",
+	"com.dubitlimited.duck.tween": "git+https://github.com/XRGames/duck-tween#c360c54a1b998b999611dac340cf6f066fc7ccdc"
   }
 }

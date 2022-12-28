@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts.Gameplay.Services;
+using UnityDependencyInjection;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [Inject]
+    private PlayerAccessService playerAccessService;
+
     public float spawnDelay = 2;
     public float spawnRate = 2;
 
@@ -15,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         InvokeRepeating("SpawnZombies", spawnDelay, spawnRate);
-        
+
     }
 
     // Update is called once per frame
@@ -41,7 +46,7 @@ public class SpawnManager : MonoBehaviour
         var ranWidth = 0f;
         var ranHeight = 0f;
 
-        Vector2 bounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        Vector2 bounds = playerAccessService.PlayerCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
        switch (index)
         {
@@ -52,10 +57,10 @@ public class SpawnManager : MonoBehaviour
                 ranWidth = bounds.x / 2 + minSpawnRadius;
                 break;
             case 3:
-                ranHeight = bounds.y / 2 + -minSpawnRadius; 
+                ranHeight = bounds.y / 2 + -minSpawnRadius;
                 break;
             case 4:
-                ranWidth = bounds.x / 2 + -minSpawnRadius; 
+                ranWidth = bounds.x / 2 + -minSpawnRadius;
                 break;
         }
 
