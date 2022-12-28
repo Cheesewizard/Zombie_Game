@@ -1,36 +1,40 @@
 using System;
-using Game.Scripts.Controls;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
 
 namespace Game.Scripts.Gameplay.Guns
 {
-    public class Gun : MonoBehaviour
+    public abstract class Gun : MonoBehaviour
     {
-        private PlayerInput playerInput;
+        [SerializeField] protected GunConfig gunConfig;
 
-        public Action OnShoot;
-        
-        private void Start()
+        private GunHoldable gunHoldable;
+
+        private bool canShoot;
+
+        public Action<GunConfig> OnShoot;
+        public Action OnFinishShoot;
+
+        protected virtual void Init(GunConfig gunConfig)
         {
-            playerInput = PlayerInputLocator.GetPlayerInput();
-            playerInput.Player.Shoot.performed += Shoot;
-        }
-        
-        private void Shoot(InputAction.CallbackContext context)
-        {
-            OnShoot?.Invoke();
-        }
-        
-        public virtual void Reload()
-        {
-            
+            this.gunConfig = gunConfig;
         }
 
-        private void OnDestroy()
+        protected virtual async void Shoot()
         {
-            playerInput.Player.Shoot.performed -= Shoot;
+            OnShoot?.Invoke(gunConfig);
+
+            await UniTask.Delay(TimeSpan.FromSeconds(gunConfig.FireRate));
+
+            OnFinishShoot?.Invoke();
+        }
+
+        protected virtual void Reload()
+        {
+        }
+
+        protected void IsEnabled()
+        {
         }
     }
-    
 }

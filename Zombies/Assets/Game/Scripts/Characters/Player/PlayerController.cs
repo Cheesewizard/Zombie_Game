@@ -1,14 +1,17 @@
 using System;
 using Assets.Scripts.Interfaces;
-using Game.Scripts.Controls;
+using UnityDependencyInjection;
 using UnityEngine;
+using Zombieland.Gameplay.Services;
 
 namespace Game.Scripts.Characters.Player
 {
     public class PlayerController : MonoBehaviour, IKillable, IDamageable, IPlayer
     {
         private BoxCollider2D meleeHitBox;
-        private PlayerInput playerInput;
+        
+        [Inject]
+        private PlayerInputConsumerAccessService playerInput;
 
         public float movementSpeed = 20;
         public float health = 150;
@@ -22,13 +25,10 @@ namespace Game.Scripts.Characters.Player
 
         private void Start()
         {
-            playerInput = PlayerInputLocator.GetPlayerInput();
-            playerInput.Player.Enable();
-
             meleeHitBox = gameObject.GetComponentInParent<BoxCollider2D>();
-            //Cursor.visible = false; // maybe remove. COuld add laser site as an item further into the gam
+            //Cursor.visible = false; // maybe remove. Could add laser site as an item further into the gam
         }
-
+        
         private void Update()
         {
             LookAtMouse();
@@ -45,17 +45,18 @@ namespace Game.Scripts.Characters.Player
 
         private void Move()
         {
-            var input = playerInput.Player.Move.ReadValue<Vector2>();
+            var input = playerInput.playerInput.Player.Move.ReadValue<Vector2>();
 
             var newPosition = new Vector2(input.x, input.y) * (movementSpeed * Time.deltaTime);
-        
+            
             OnMovement?.Invoke(newPosition);
             transform.root.Translate(newPosition.x, newPosition.y, 0f, Space.World);
+            
         }
 
         private void LookAtMouse()
         {
-            var input = playerInput.Player.Rotate.ReadValue<Vector2>();
+            var input = playerInput.playerInput.Player.Rotate.ReadValue<Vector2>();
 
             var worldPoint = targetCamera.ScreenToWorldPoint(new Vector3(input.x, input.y, targetCamera.nearClipPlane));
             var difference = worldPoint - transform.position;
@@ -117,5 +118,6 @@ namespace Game.Scripts.Characters.Player
         {
             throw new System.NotImplementedException();
         }
+        
     }
 }

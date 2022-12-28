@@ -17,12 +17,12 @@ namespace Game.Scripts.Animator
 
         private void Awake()
         {
-            gun.OnShoot += Shoot;
-            playerController.OnMovement += Movement;
-            playerController.OnKilled += Death;
+         //   gun.OnShoot += HandleShootAnimation;
+            playerController.OnMovement += HandleMovementAnimation;
+            playerController.OnKilled += HandleDeathAnimation;
         }
 
-        private void Shoot()
+        private void HandleShootAnimation(GunConfig gunConfig)
         {
             animator.SetTrigger("IsPistolAttack");
         }
@@ -32,12 +32,12 @@ namespace Game.Scripts.Animator
             animator.SetTrigger("IsKnifeAttack");
         }
 
-        private void Movement(Vector2 movement)
+        private void HandleMovementAnimation(Vector2 movement)
         {
-            animator.SetFloat("Speed", Mathf.Abs(movement.x + movement.y));
+            animator.SetFloat("Speed", Mathf.Max(Mathf.Abs(movement.x), Mathf.Abs(movement.y)));
         }
 
-        private void Death()
+        private void HandleDeathAnimation()
         {
             // This uses a state behaviour within the animator that deletes the gameObject after the death animation.
             animator.SetTrigger("Death");
@@ -45,9 +45,9 @@ namespace Game.Scripts.Animator
 
         private void OnDestroy()
         {
-            gun.OnShoot += Shoot;
-            playerController.OnMovement -= Movement;
-            playerController.OnKilled -= Death;
+          //  gun.OnShoot -= HandleShootAnimation;
+            playerController.OnMovement -= HandleMovementAnimation;
+            playerController.OnKilled -= HandleDeathAnimation;
         }
     }
 }

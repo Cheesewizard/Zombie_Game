@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
     // camera will follow this object
-    public Transform target;
+    public Transform camera;
 
-
-    private void Start()
+    private void Awake()
     {
-        
+        camera = camera != null ? camera : Camera.main.transform;
     }
 
     private void LateUpdate()
     {
         // update position
-        Camera.main.transform.position = new Vector3(target.position.x, target.position.y, -10);
+        camera.position = new Vector3(transform.position.x, transform.position.y, -10);
     }
 }
