@@ -1,9 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
+using Game.Config;
 using Game.Scripts.Gameplay.Services;
 using Quack.Utils;
 using UnityEngine;
 using Game.Scripts.Core.Loading;
 using Game.Scripts.Gameplay;
+using Quack.SceneMagic.SceneLoading;
 
 namespace Game.Scripts.Core
 {

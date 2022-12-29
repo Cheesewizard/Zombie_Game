@@ -1,6 +1,8 @@
 using Game.Scripts.Core.Loading;
 using Game.Scripts.Gameplay.Services;
+using Quack.ReferenceMagic.Runtime;
 using Quack.Utils;
+using Sirenix.OdinInspector;
 using UnityDependencyInjection;
 using UnityEngine;
 
@@ -10,6 +12,9 @@ namespace Game.Scripts.Gameplay.Movement
 	{
 		[Inject]
 		private PlayerAccessService playerAccessService;
+
+		[SerializeField, Required, Find(Destination.Ancestors)]
+		private ZombieRig zombieRig;
 
 		[SerializeField]
 		private float moveSpeed = 0.5f;
@@ -33,14 +38,14 @@ namespace Game.Scripts.Gameplay.Movement
 		{
 			var step = moveSpeed * Time.deltaTime;
 			var playerPosition = playerAccessService.PlayerTransform.position;
-			var root = transform.root;
+			var root = zombieRig.transform;
 
 			root.position = Vector2.MoveTowards(root.position, playerPosition, step);
 		}
 
 		private void RotateZombie()
 		{
-			var root = transform.root;
+			var root = zombieRig.transform;
 			var playerPosition = playerAccessService.PlayerTransform.position;
 
 			var difference = new Vector3()

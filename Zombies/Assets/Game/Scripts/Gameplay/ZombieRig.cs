@@ -1,25 +1,14 @@
-﻿using System;
-using Game.Scripts.Core.Loading;
-using Quack.Utils;
+﻿using Quack.ReferenceMagic.Runtime;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay
 {
-	public class ZombieRig : MonoBehaviour, ISceneInitializedHandler
+	public class ZombieRig : MonoBehaviour
 	{
-		private void Awake()
-		{
-			SceneBroadcaster.RegisterReceiver(this);
-		}
+		[SerializeField, Required, Find(Destination.AllChildren)]
+		private ZombieLogic zombieLogic;
 
-		private void Start()
-		{
-			//gameObject.SetActive(false);
-		}
-
-		public void HandleSceneInitialized()
-		{
-			//gameObject.SetActive(true);
-		}
+		public ZombieLogic ZombieLogic => zombieLogic;
 	}
 }

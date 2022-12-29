@@ -4,25 +4,26 @@ using Zombieland.Gameplay.Services;
 
 namespace Game.Scripts.Gameplay.Guns
 {
-    public class Pistol : Gun
-    {
-        [Inject]
-        private PlayerInputConsumerAccessService playerInput;
+	public class Pistol : Gun
+	{
+		[Inject]
+		private PlayerInputConsumerAccessService playerInput;
 
-        private void Start()
-        {
-            base.Init(gunConfig);
-            playerInput.playerInput.Player.Shoot.performed += HandleShootGun;
-        }
+		private void Start()
+		{
+			base.Init(gunConfig);
+			playerInput.playerInput.Player.Shoot.performed += HandleShootGun;
+		}
 
-        private void HandleShootGun(InputAction.CallbackContext context)
-        {
-            base.Shoot();
-        }
+		private async void HandleShootGun(InputAction.CallbackContext context)
+		{
+			await base.Shoot();
 
-        private void OnDestroy()
-        {
-           // playerInput.playerInput.Player.Shoot.performed -= HandleShootGun;
-        }
-    }
+		}
+
+		private void OnDestroy()
+		{
+			// playerInput.playerInput.Player.Shoot.performed -= HandleShootGun;
+		}
+	}
 }

@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using Game.Configs;
+using Quack.ReferenceMagic.Runtime;
+using Sirenix.OdinInspector;
 
 namespace Game.Scripts.Gameplay.Guns
 {
@@ -9,9 +12,14 @@ namespace Game.Scripts.Gameplay.Guns
 		[SerializeField]
 		protected GunConfig gunConfig;
 
+		[SerializeField, Required, Find(Destination.Self)]
+		protected Bullet bullet;
+
+		public GunConfig GunConfig => gunConfig;
+
 		private GunHoldable gunHoldable;
 
-		private bool canShoot;
+		private bool canShoot = true;
 
 		public Action<GunConfig> OnShoot;
 		public Action OnFinishShoot;
@@ -19,14 +27,21 @@ namespace Game.Scripts.Gameplay.Guns
 		protected virtual void Init(GunConfig gunConfig)
 		{
 			this.gunConfig = gunConfig;
+			//TODO Change this to be part of the pooling system
+			bullet.Init();
 		}
 
-		protected virtual async void Shoot()
+		protected virtual async UniTask Shoot()
 		{
+			if(!canShoot) return;
+
 			OnShoot?.Invoke(gunConfig);
+			bullet.ResetTransform(gunConfig.SpawnPosition);
+			bullet.Launch(this);
 
+			// TODO: I dont like this arbituary delay, need a better design
 			await UniTask.Delay(TimeSpan.FromSeconds(gunConfig.FireRate));
-
+			canShoot = true;
 			OnFinishShoot?.Invoke();
 		}
 

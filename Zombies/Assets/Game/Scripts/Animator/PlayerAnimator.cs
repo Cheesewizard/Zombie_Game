@@ -1,3 +1,4 @@
+using Game.Configs;
 using Game.Scripts.Characters.Player;
 using Game.Scripts.Gameplay.Guns;
 using Quack.ReferenceMagic.Runtime;
