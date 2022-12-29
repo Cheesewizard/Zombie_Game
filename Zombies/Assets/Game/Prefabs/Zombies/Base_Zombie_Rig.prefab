@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1777714623032120518}
-  - component: {fileID: 2628819271055735433}
   m_Layer: 10
   m_Name: Visual
   m_TagString: Untagged
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 7914151072075007490}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2628819271055735433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221490786180046527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c7017bb191f4ecfa74b0e6d762eaa4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blood: {fileID: 0}
 --- !u!1 &1657636168660170983
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +430,6 @@ GameObject:
   - component: {fileID: 8773509878059010207}
   - component: {fileID: 2174613041028577963}
   - component: {fileID: 7518639427902304727}
-  - component: {fileID: 5518123070085880631}
   m_Layer: 10
   m_Name: Logic
   m_TagString: Untagged
@@ -497,21 +482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieRig: {fileID: 107041423360432625}
   moveSpeed: 0.2
---- !u!114 &5518123070085880631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5326238415504781139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d779b90647584844584b0f8cd11282e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloods:
-  - {fileID: 0}
-  spawnOffset: 10
 --- !u!1 &7312810243735904605
 GameObject:
   m_ObjectHideFlags: 0

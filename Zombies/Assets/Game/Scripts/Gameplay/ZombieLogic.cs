@@ -38,7 +38,6 @@ namespace Game.Scripts.Gameplay
 
 			//DeathKnockback();
 			spriteRenderer.sortingOrder = 1;
-			gameObject.GetComponent<SpawnBloodEffect>().enabled = false;
 			//gameObject.transform.Rotate(transform.position, Random.Range(0, 360), Space.Self);
 		}
 
