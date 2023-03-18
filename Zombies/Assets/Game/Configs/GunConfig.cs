@@ -1,25 +1,35 @@
 ﻿using System;
 using Game.Scripts.Gameplay.Guns;
+using Quack.Utils;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Configs
 {
-	[Serializable]
-	public class GunConfig
-	{
-		[SerializeField]
-		public GunTypes GunType;
+    [Serializable]
+    [CreateAssetMenu(menuName = "Config/GunConfig")]
+    public class GunConfig : WeaponConfig
+    {
+        [SerializeField] private GunTypes gunType;
+        public GunTypes GunType => gunType;
 
-		[SerializeField]
-		public float FireRate;
+        [SerializeField] private Transform spawnPosition;
+        public Transform SpawnPosition => spawnPosition;
 
-		[SerializeField]
-		public float BulletSpeed;
+        [SerializeField] private float effectiveRange = 100f;
+        public float EffectiveRange => effectiveRange;
 
-		[SerializeField]
-		public float EffectiveRange;
+        [Title("Magazine", "The magazine that been used for the gun and its related configs.")]
+        [SerializeField, HideLabel]
+        private MagazineConfig magazineConfig;
+        public MagazineConfig MagazineConfig => magazineConfig;
 
-		[SerializeField]
-		public Transform SpawnPosition;
-	}
+        [SerializeField, HideLabel] 
+        private GunRecoilConfig recoilConfig;
+        public GunRecoilConfig RecoilConfig => recoilConfig;
+
+        [SerializeField] 
+        private RangedValue bulletSpeed = new RangedValue(5f, 1000f);
+        public RangedValue BulletSpeed => bulletSpeed;
+    }
 }

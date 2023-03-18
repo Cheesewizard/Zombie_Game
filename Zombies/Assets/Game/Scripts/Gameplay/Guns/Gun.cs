@@ -11,11 +11,10 @@ namespace Game.Scripts.Gameplay.Guns
 	{
 		[SerializeField]
 		protected GunConfig gunConfig;
+		public GunConfig GunConfig => gunConfig;
 
 		[SerializeField, Required, Find(Destination.Self)]
 		protected Bullet bullet;
-
-		public GunConfig GunConfig => gunConfig;
 
 		private GunHoldable gunHoldable;
 
@@ -40,7 +39,7 @@ namespace Game.Scripts.Gameplay.Guns
 			bullet.Launch(this);
 
 			// TODO: I dont like this arbituary delay, need a better design
-			await UniTask.Delay(TimeSpan.FromSeconds(gunConfig.FireRate));
+			await UniTask.Delay(TimeSpan.FromSeconds(gunConfig.FireRate.Random()));
 			canShoot = true;
 			OnFinishShoot?.Invoke();
 		}

@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Interfaces;
 using Game.Configs;
 using Game.Scripts.Utils;
 using Quack.ReferenceMagic.Runtime;
@@ -7,16 +8,30 @@ using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Guns
 {
-	public class Bullet : ResetableObject
+	public class Bullet : ResetableObject, IDamageDealer
 	{
 		[SerializeField, Required, Find(Destination.Self)]
 		private BulletVisualiser visualiser;
+		
+		[SerializeField]
+		private float maxPenetrationPower = 100f;
+		
+		public float ImpactForce => impactForce;
+		public Ray Ray => ray;
 
 		private Ray ray;
+		private float impactForce;
 		private float bulletSpeed;
 		private float effectiveRange;
 		private bool isFlying;
+		private float penetrationPower;
+		private float bonusDamageMultiplier;
 		private Gun firingGun;
+		public GunConfig GunConfig => firingGun.GunConfig;
+
+		public float Damage => firingGun.GunConfig.Stats.Damage * (penetrationPower / maxPenetrationPower) * (1.0f + bonusDamageMultiplier);
+		public float CriticalDamagePercentage => firingGun.GunConfig.Stats.CriticalDamagePercentage;
+		public float CriticalChancePercentage => firingGun.GunConfig.Stats.CriticalChancePercentage;
 
 		public override void Init()
 		{
@@ -32,7 +47,7 @@ namespace Game.Scripts.Gameplay.Guns
 			isFlying = false;
 			visualiser.InitVisual();
 
-			//penetrationPower = maxPenetrationPower;
+			penetrationPower = maxPenetrationPower;
 		}
 
 		private void StartFlying()
@@ -61,10 +76,10 @@ namespace Game.Scripts.Gameplay.Guns
 
 			ray.origin = transform.position;
 			ray.direction = -transform.up;
-			// impactForce = gun.GunConfig.ImpactForce;
+			impactForce = gun.GunConfig.ImpactForce;
 			effectiveRange = gun.GunConfig.EffectiveRange;
-			bulletSpeed = gun.GunConfig.BulletSpeed;
-			// bloodHitEffect = gun.GunConfig.BloodHitFeedbackPrefab;
+			bulletSpeed = gun.GunConfig.BulletSpeed.Random();
+			//bloodHitEffect = gun.GunConfig.BloodHitFeedbackPrefab;
 
 			// Detach the bullet from the parent (magazine)
 			transform.DetatchFromParent();

@@ -8,7 +8,7 @@ using Zombieland.Gameplay.Services;
 
 namespace Game.Scripts.Characters.Player
 {
-	public class PlayerLogic : MonoBehaviour, IKillable, IDamageable, IPlayer
+	public class PlayerLogic : MonoBehaviour
 	{
 		[Inject]
 		private PlayerInputConsumerAccessService playerInput;
@@ -120,4 +120,8 @@ namespace Game.Scripts.Characters.Player
 			throw new System.NotImplementedException();
 		}
 	}
+}
+
+namespace Game.Scripts.Gameplay
+{
 }

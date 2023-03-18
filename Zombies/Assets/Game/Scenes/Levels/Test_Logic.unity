@@ -309,6 +309,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 259047169}
     m_Modifications:
+    - target: {fileID: 4587955103019098105, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
+      propertyPath: zombieHealth
+      value: 
+      objectReference: {fileID: 1501963325}
     - target: {fileID: 6263735976528748793, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1110,7 +1114,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: -1
   m_SortingLayerID: 1288899319
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &787687975
 RectTransform:
@@ -1821,6 +1825,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
+--- !u!114 &1501963325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8063415317774448613, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
+  m_PrefabInstance: {fileID: 196870492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaba2edb8214a16ad3d0b43376a7030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1512326614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6263735976528748793, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
@@ -2083,6 +2098,18 @@ PrefabInstance:
     - target: {fileID: 6263735976528748793, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537732481630836434, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
+      propertyPath: m_SortingLayer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537732481630836434, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1288899319
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860385601732264135, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7594448180490054533, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
       propertyPath: m_Name

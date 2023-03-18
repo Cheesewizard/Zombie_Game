@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0ecf678fed407eb4c2509c49244cac, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  weaponId: 1
+  prefab: {fileID: 8982064496614540360, guid: fbd695699cae0e043b2ea0d1840c14cd, type: 3}
+  upgradePrice: 0
+  weaponStats:
+    damage: 10
+    criticalDamagePercentage: 2
+    criticalChancePercentage: 2
+  fireRate:
+    from: 7
+    to: 7
+  impactForce: 1
+  gunType: 0
+  spawnPosition: {fileID: 0}
+  effectiveRange: 25
+  magazineConfig:
+    infiniteAmmo: 0
+    totalMagazines: 0
+    extraMagazines: 0
+    magazinePoolSize: 5
+  recoilConfig:
+    sensitivityRange:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    recoverSpeedRange:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    tiltAngle: -12
+    spreadAngleRange:
+      from: -3
+      to: 3
+    recoilDistanceRange:
+      from: 0.01
+      to: 0.05
+    recoilCatchDuration: 0.06
+    stabilizerRecoilMultiplier: 0.5
+    stabilizerRecoilTimeScale: 1.5
+    canBeAffectedBySteadyPerk: 0
+    steadyPerkRecoilMultiplier: 0.65
+    steadyPerkRecoilTimeScale: 1.35
+  bulletSpeed:
+    from: 350
+    to: 350
