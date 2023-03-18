@@ -133,7 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1221490786180046527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd345e67e9ea4539a7736605ba3d5665, type: 3}
+  m_Script: {fileID: 11500000, guid: 43f404856db34d5c9b2bc3514ad64723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1657636168660170983
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8358839569182733849}
   zombieLogic: {fileID: 2174613041028577963}
-  zombieHealth: {fileID: 3459940711903523011}
+  zombieHealth: {fileID: 2146480809113706605}
 --- !u!212 &723536309883213526
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932768592116557125}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6228b4633fbe4904b26f12010266c956, type: 3}
+  m_Script: {fileID: 11500000, guid: 92d2f9b60ad24309bb5472ba85f5fc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPartType: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3218605395091997746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6228b4633fbe4904b26f12010266c956, type: 3}
+  m_Script: {fileID: 11500000, guid: 92d2f9b60ad24309bb5472ba85f5fc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPartType: 2
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3685710729475985146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c01fb6a2c74dde87c5e13582bb16b4, type: 3}
+  m_Script: {fileID: 11500000, guid: a4e8f474ddc9444d992b28d3085e38d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   zombieRig: {fileID: 107041423360432625}
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4971948728750815940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6228b4633fbe4904b26f12010266c956, type: 3}
+  m_Script: {fileID: 11500000, guid: 92d2f9b60ad24309bb5472ba85f5fc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPartType: 1
@@ -842,11 +842,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5326238415504781139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49f84c3255bc70b46be526be515f19b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c8bdf0ce2884cd5834f0d7affed3363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 723536309883213526}
-  zombieHealth: {fileID: 3459940711903523011}
+  zombieHealth: {fileID: 2146480809113706605}
   knockback: 0.5
 --- !u!114 &3459940711903523011
 MonoBehaviour:
@@ -857,14 +857,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5326238415504781139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbaba2edb8214a16ad3d0b43376a7030, type: 3}
+  m_Script: {fileID: 11500000, guid: 78edb7498c7747529ac38c7e2d9bdaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  bodyPart:
-  - {fileID: 3568968604076246367}
-  - {fileID: 3567798632653873382}
-  - {fileID: 2398895434648166447}
+  zombieRig: {fileID: 107041423360432625}
 --- !u!114 &7518639427902304727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,10 +884,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5326238415504781139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0cad1b809654db0a06977f1ac12761e, type: 3}
+  m_Script: {fileID: 11500000, guid: e5eb659f1dac403e8e6940392644bdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieRig: {fileID: 107041423360432625}
+  maxHealth: 100
+  bodyPart:
+  - {fileID: 3568968604076246367}
+  - {fileID: 3567798632653873382}
+  - {fileID: 2398895434648166447}
 --- !u!1 &5601510916642491570
 GameObject:
   m_ObjectHideFlags: 0

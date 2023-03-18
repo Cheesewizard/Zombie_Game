@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using Game.Configs;
+using Game.Scripts.Gameplay.Weapons;
 using Quack.ReferenceMagic.Runtime;
 using Sirenix.OdinInspector;
 
@@ -9,6 +10,11 @@ namespace Game.Scripts.Gameplay.Guns
 {
 	public abstract class Gun : MonoBehaviour
 	{
+		[TitleGroup("References")]
+		[SerializeField, Required, Find(Destination.Ancestors)]
+		private WeaponHoldable weaponHoldable;
+		public WeaponHoldable WeaponHoldable => weaponHoldable;
+		
 		[SerializeField]
 		protected GunConfig gunConfig;
 		public GunConfig GunConfig => gunConfig;
@@ -16,7 +22,9 @@ namespace Game.Scripts.Gameplay.Guns
 		[SerializeField, Required, Find(Destination.Self)]
 		protected Bullet bullet;
 
-		private GunHoldable gunHoldable;
+		[SerializeField] 
+		private Transform spawnPosition;
+		public Transform SpawnPosition => spawnPosition;
 
 		private bool canShoot = true;
 
@@ -35,7 +43,7 @@ namespace Game.Scripts.Gameplay.Guns
 			if(!canShoot) return;
 
 			OnShoot?.Invoke(gunConfig);
-			bullet.ResetTransform(gunConfig.SpawnPosition);
+			bullet.ResetTransform(SpawnPosition);
 			bullet.Launch(this);
 
 			// TODO: I dont like this arbituary delay, need a better design

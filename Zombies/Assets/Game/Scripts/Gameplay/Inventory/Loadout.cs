@@ -1,7 +1,9 @@
-﻿namespace Game.Scripts.Gameplay.Guns
+﻿using Game.Scripts.Gameplay.Weapons;
+
+namespace Game.Scripts.Gameplay.Guns
 {
     public class Loadout
     {
-        public GunHoldable gunHoldable;
+        public WeaponHoldable weaponHoldable;
     }
 }

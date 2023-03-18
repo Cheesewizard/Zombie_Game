@@ -1,29 +1,19 @@
-﻿using UnityDependencyInjection;
-using UnityEngine.InputSystem;
-using Zombieland.Gameplay.Services;
+﻿using Cysharp.Threading.Tasks;
+using Game.Scripts.Gameplay.Weapons;
 
 namespace Game.Scripts.Gameplay.Guns
 {
-	public class Pistol : Gun
+	public class Pistol : Gun, IUsableWeapon
 	{
-		[Inject]
-		private PlayerInputConsumerAccessService playerInput;
-
 		private void Start()
 		{
+			WeaponHoldable.SetCurrentWeapon(this);
 			base.Init(gunConfig);
-			playerInput.playerInput.Player.Shoot.performed += HandleShootGun;
 		}
 
-		private async void HandleShootGun(InputAction.CallbackContext context)
+		public async UniTask PerformAction()
 		{
 			await base.Shoot();
-
-		}
-
-		private void OnDestroy()
-		{
-			// playerInput.playerInput.Player.Shoot.performed -= HandleShootGun;
 		}
 	}
 }

@@ -312,7 +312,7 @@ PrefabInstance:
     - target: {fileID: 4587955103019098105, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
       propertyPath: zombieHealth
       value: 
-      objectReference: {fileID: 1501963325}
+      objectReference: {fileID: 1501963327}
     - target: {fileID: 6263735976528748793, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1825,15 +1825,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
---- !u!114 &1501963325 stripped
+--- !u!114 &1501963327 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8063415317774448613, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4767896731669112651, guid: 9c0f9a5c235f5b84aa11902a52b8d6dc, type: 3}
   m_PrefabInstance: {fileID: 196870492}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbaba2edb8214a16ad3d0b43376a7030, type: 3}
+  m_Script: {fileID: 11500000, guid: e5eb659f1dac403e8e6940392644bdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1512326614 stripped

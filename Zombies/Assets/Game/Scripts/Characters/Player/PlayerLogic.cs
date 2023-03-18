@@ -72,11 +72,11 @@ namespace Game.Scripts.Characters.Player
 			OnKilled.Invoke();
 		}
 
-		public void TakeDamage(IWeapon weapon)
+		public void TakeDamage(IWeaponStats weaponStats)
 		{
 			if (!godMode)
 			{
-				this.health -= weapon.GetDamage();
+				this.health -= weaponStats.GetDamage();
 				Debug.Log($"Player health = {health}");
 				if (this.health <= 0)
 				{
@@ -120,8 +120,4 @@ namespace Game.Scripts.Characters.Player
 			throw new System.NotImplementedException();
 		}
 	}
-}
-
-namespace Game.Scripts.Gameplay
-{
 }

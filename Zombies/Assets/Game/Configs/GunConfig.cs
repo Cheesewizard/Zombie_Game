@@ -13,9 +13,6 @@ namespace Game.Configs
         [SerializeField] private GunTypes gunType;
         public GunTypes GunType => gunType;
 
-        [SerializeField] private Transform spawnPosition;
-        public Transform SpawnPosition => spawnPosition;
-
         [SerializeField] private float effectiveRange = 100f;
         public float EffectiveRange => effectiveRange;
 

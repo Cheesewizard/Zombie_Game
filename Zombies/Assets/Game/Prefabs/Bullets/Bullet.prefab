@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualiser: {fileID: 1973955984074287133}
+  maxPenetrationPower: 100
 --- !u!120 &3508021906457781472
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -106,10 +107,10 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 1.5376487, y: 0.6517904, z: 0.7322178}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -127,7 +128,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9811321, g: 0.84596264, b: 0, a: 1}
+      key0: {r: 0.98039216, g: 0.84705883, b: 0, a: 1}
       key1: {r: 0.9811321, g: 0.84596264, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

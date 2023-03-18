@@ -37,7 +37,7 @@ namespace Game.Scripts.Gameplay.Guns
 		{
 			base.Init();
 			visualiser.InitVisual();
-			//penetrationPower = maxPenetrationPower;
+			penetrationPower = maxPenetrationPower;
 		}
 
 		public void ResetTransform(Transform parent)

@@ -1,6 +1,6 @@
 namespace Assets.Scripts.Interfaces
 {
-    public interface IWeapon
+    public interface IWeaponStats
     {
         float GetDamage();
         int GetAmmo();

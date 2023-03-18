@@ -1,7 +1,7 @@
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class Knife : MonoBehaviour, IWeapon
+public class Knife : MonoBehaviour, IWeaponStats
 {
     public float Damage = 50;
 
