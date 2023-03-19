@@ -1,10 +1,11 @@
 using System;
 using Assets.Scripts.Interfaces;
+using Game.Scripts.Gameplay.Inventory;
+using Game.Scripts.Gameplay.Services;
 using Quack.ReferenceMagic.Runtime;
 using Sirenix.OdinInspector;
 using UnityDependencyInjection;
 using UnityEngine;
-using Zombieland.Gameplay.Services;
 
 namespace Game.Scripts.Characters.Player
 {
@@ -29,7 +30,7 @@ namespace Game.Scripts.Characters.Player
 		private void Start()
 		{
 			meleeHitBox = gameObject.GetComponentInParent<BoxCollider2D>();
-			//Cursor.visible = false; // maybe remove. Could add laser site as an item further into the gam
+			//Cursor.visible = false; // maybe remove. Could add laser site as an item further into the game
 		}
 
 		private void Update()
@@ -48,7 +49,7 @@ namespace Game.Scripts.Characters.Player
 
 		private void Move()
 		{
-			var input = playerInput.playerInput.Player.Move.ReadValue<Vector2>();
+			var input = playerInput.InputConsumer.Player.Move.ReadValue<Vector2>();
 
 			var newPosition = new Vector2(input.x, input.y) * (movementSpeed * Time.deltaTime);
 
@@ -58,7 +59,7 @@ namespace Game.Scripts.Characters.Player
 
 		private void LookAtMouse()
 		{
-			var input = playerInput.playerInput.Player.Rotate.ReadValue<Vector2>();
+			var input = playerInput.InputConsumer.Player.Rotate.ReadValue<Vector2>();
 
 			var worldPoint = targetCamera.ScreenToWorldPoint(new Vector3(input.x, input.y, targetCamera.nearClipPlane));
 			var difference = worldPoint - transform.position;

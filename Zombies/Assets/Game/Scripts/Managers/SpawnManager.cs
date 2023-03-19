@@ -11,7 +11,7 @@ namespace Game.Scripts.Managers
     public class SpawnManager : MonoBehaviour, ISceneInitializedHandler
     {
         [Inject]
-        private PlayerAccessService playerAccessService;
+        private GameplayPlayerAccessService playerAccessService;
 
         // Temp property
         [Inject]

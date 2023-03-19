@@ -11,7 +11,7 @@ namespace Game.Scripts.Gameplay.Movement
 	public class ZombieMovementBehaviour : MonoBehaviour, ISceneInitializedHandler
 	{
 		[Inject]
-		private PlayerAccessService playerAccessService;
+		private GameplayPlayerAccessService playerAccessService;
 
 		[SerializeField, Required, Find(Destination.Ancestors)]
 		private ZombieRig zombieRig;

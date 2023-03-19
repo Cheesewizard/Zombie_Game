@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6227947660102340105}
   - component: {fileID: 7114234094276308876}
   m_Layer: 0
-  m_Name: Blood
+  m_Name: Blood_Pistol
   m_TagString: Blood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

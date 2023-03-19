@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7801347583383650807}
   - component: {fileID: 3508021906457781472}
   m_Layer: 11
-  m_Name: Bullet
+  m_Name: PistolBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,6 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualiser: {fileID: 1973955984074287133}
   maxPenetrationPower: 100
+  gunSourceID: 1
 --- !u!120 &3508021906457781472
 LineRenderer:
   m_ObjectHideFlags: 0

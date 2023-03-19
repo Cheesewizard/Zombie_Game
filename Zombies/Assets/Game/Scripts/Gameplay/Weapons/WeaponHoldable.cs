@@ -1,28 +1,33 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Game.Scripts.Gameplay.Services;
 using UnityDependencyInjection;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Zombieland.Gameplay.Services;
 
 namespace Game.Scripts.Gameplay.Weapons
 {
-    public class WeaponHoldable : MonoBehaviour
+    public class WeaponHoldable : MonoBehaviour, IWeaponHoldable, IDependencyInjectionCompleteHandler
     {
         [Inject]
         private PlayerInputConsumerAccessService playerInput;
 
         public IUsableWeapon currentWeapon;
-		
-        private void Start()
+        public bool CanBeSwapped { get; set; }
+
+        public event Action onWeaponEquipped;
+
+        public void HandleDependencyInjectionComplete()
         {
-            playerInput.playerInput.Player.Shoot.performed += HandleShootGun;
+            playerInput.InputConsumer.Player.Shoot.performed += HandleShootGun;
         }
 
         public void SetCurrentWeapon(IUsableWeapon newWeapon)
         {
             currentWeapon = newWeapon;
+            onWeaponEquipped?.Invoke();
         }
-		
+
         private async void HandleShootGun(InputAction.CallbackContext context)
         {
             if (currentWeapon == null) return; // Do we always start with pistol?
@@ -31,12 +36,18 @@ namespace Game.Scripts.Gameplay.Weapons
 
         private void OnDestroy()
         {
-            playerInput.playerInput.Player.Shoot.performed -= HandleShootGun;
+            playerInput.InputConsumer.Player.Shoot.performed -= HandleShootGun;
         }
     }
 
     public interface IUsableWeapon
     {
+        public int WeaponId { get; }
         public UniTask PerformAction();
+    }
+
+    public interface IWeaponHoldable
+    {
+        public bool CanBeSwapped { get; set;}
     }
 }

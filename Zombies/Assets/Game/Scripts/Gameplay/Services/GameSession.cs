@@ -1,5 +1,4 @@
 using UnityDependencyInjection;
-using Zombieland.Gameplay.Services;
 
 namespace Game.Scripts.Gameplay.Services
 {
@@ -28,15 +27,8 @@ namespace Game.Scripts.Gameplay.Services
             AddDefaultServices();
             DependencyContainer.SelfInject();
 
-            var inputConsumerAccessService = DependencyContainer
-                .GetDependency<PlayerInputConsumerAccessService.IPlayerInputConsumerAccessService>();
-            
-            inputConsumerAccessService.playerInput.Enable();
-        }
-
-        public void Start()
-        {
-            //playerInputConsumer.SetEnabled(true);
+            var inputConsumerAccessService = DependencyContainer.GetDependency<IPlayerInputConsumerAccessService>();
+            inputConsumerAccessService.InputConsumer.Enable();
         }
 
         private void Destroy()
@@ -46,7 +38,7 @@ namespace Game.Scripts.Gameplay.Services
 
         private void AddDefaultServices()
         {
-            // Add default service here
+            // Add default services here
             DependencyContainer.Add(new PlayerInputConsumerAccessService());
 
             switch (currentGameMode)

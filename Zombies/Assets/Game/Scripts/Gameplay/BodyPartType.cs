@@ -3,6 +3,7 @@
     public enum BodyPartType
     {
         Head,
+        Chest,
         RightArm,
         LeftArm
     }

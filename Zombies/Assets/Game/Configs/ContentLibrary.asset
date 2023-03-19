@@ -14,3 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionSceneConfig: {fileID: 11400000, guid: ba500b511baf6cf4aaa831eed4179df2, type: 2}
   landingPageSceneConfig: {fileID: 11400000, guid: 812d3fc3d3384cd4e9788153db320143, type: 2}
+  weaponLibrary:
+    weapons:
+    - weaponId: 1
+      displayName: Pistol
+      weaponLevels:
+      - {fileID: 11400000, guid: 1b67098843483664bacc7339ec038978, type: 2}
+  bulletImpactDataLibrary:
+    weaponImpactDataEntries:
+    - weaponSource: 1
+      maxParticleCount: 30
+      maxDecalCount: 30
+      impactData:
+      - material: 0
+        audioSource: {fileID: 0}
+        particleSystem: {fileID: 8108919766609341447, guid: 28d23640ac19feb49867fea714631cd5, type: 3}
+  bloodLimbBullet: {fileID: 8108919766609341447, guid: 28d23640ac19feb49867fea714631cd5, type: 3}

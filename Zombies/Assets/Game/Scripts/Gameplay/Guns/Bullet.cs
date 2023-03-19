@@ -1,27 +1,37 @@
 ﻿using System;
 using Assets.Scripts.Interfaces;
 using Game.Configs;
+using Game.Scripts.Gameplay.Services;
+using Game.Scripts.Gameplay.WorldObjects;
 using Game.Scripts.Utils;
+using Game.Utils;
 using Quack.ReferenceMagic.Runtime;
 using Sirenix.OdinInspector;
+using UnityDependencyInjection;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Guns
 {
 	public class Bullet : ResetableObject, IDamageDealer
 	{
+		[Inject]
+		private BulletImpactService bulletImpactService = null;
+
 		[SerializeField, Required, Find(Destination.Self)]
 		private BulletVisualiser visualiser;
-		
+
 		[SerializeField]
 		private float maxPenetrationPower = 100f;
-		
+
+		public ParticleSystem BloodHitEffect => bloodHitEffect;
+
 		public float ImpactForce => impactForce;
 		public Ray Ray => ray;
 
 		private Ray ray;
 		private float impactForce;
 		private float bulletSpeed;
+		private ParticleSystem bloodHitEffect;
 		private float effectiveRange;
 		private bool isFlying;
 		private float penetrationPower;
@@ -32,6 +42,9 @@ namespace Game.Scripts.Gameplay.Guns
 		public float Damage => firingGun.GunConfig.Stats.Damage * (penetrationPower / maxPenetrationPower) * (1.0f + bonusDamageMultiplier);
 		public float CriticalDamagePercentage => firingGun.GunConfig.Stats.CriticalDamagePercentage;
 		public float CriticalChancePercentage => firingGun.GunConfig.Stats.CriticalChancePercentage;
+
+		[SerializeField, ValueDropdown(OdinDropdowns.WEAPONS)]
+		private int gunSourceID;
 
 		public override void Init()
 		{
@@ -79,7 +92,7 @@ namespace Game.Scripts.Gameplay.Guns
 			impactForce = gun.GunConfig.ImpactForce;
 			effectiveRange = gun.GunConfig.EffectiveRange;
 			bulletSpeed = gun.GunConfig.BulletSpeed.Random();
-			//bloodHitEffect = gun.GunConfig.BloodHitFeedbackPrefab;
+			bloodHitEffect = gun.GunConfig.BloodHitFeedbackPrefab;
 
 			// Detach the bullet from the parent (magazine)
 			transform.DetatchFromParent();
@@ -102,7 +115,23 @@ namespace Game.Scripts.Gameplay.Guns
 					target = (hit.rigidbody != null) ? hit.rigidbody.GetComponent<BulletTarget>() : null;
 				}
 
-				//TODO: Material provider, sounds etc
+				// Check if the bullet hit a collider with a collider material provider. If so play a particle and sound.
+				if (hit.collider.TryGetComponent<ColliderMaterialProvider>(out var colliderMaterialProvider))
+				{
+					var material = colliderMaterialProvider.SurfaceMaterial;
+
+					//Play the sound for the material the bullet hit if there is a sound for it.
+					bulletImpactService.PlaySound(gunSourceID, material);
+
+					//Play the particle for the material the bullet hit if there is a particle system for it.
+					var rotation = Quaternion.LookRotation(hit.normal);
+
+					var shouldParent = colliderMaterialProvider.ShouldAttachImpactVfx;
+
+					bulletImpactService.PlayParticle(hit.collider.transform, hit.point, rotation, gunSourceID, material, shouldParent);
+					// bulletImpactService.LeaveHitDecal(hit.collider.transform, hit.point, rotation, gunSourceID, material, shouldParent);
+				}
+
 				Debug.Log("Object Hit" + target?.name);
 				if (target != null)
 				{

@@ -1,10 +1,11 @@
 using Cysharp.Threading.Tasks;
+using Game.Configs;
 using Game.Scripts.Characters.Player;
 using Quack.ReferenceMagic.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.Player
 {
 	public class PlayerRig : MonoBehaviour
 	{
@@ -13,6 +14,18 @@ namespace Game.Scripts.Gameplay
 		[SerializeField, Required, Find(Destination.AllChildren)]
 		private PlayerLogic playerLogic;
 		public PlayerLogic PlayerLogic => playerLogic;
+
+		[SerializeField, Required, Find(Destination.AllChildren)]
+		private AbstractPlayerWeaponBehaviour weaponBehaviour;
+		public AbstractPlayerWeaponBehaviour WeaponBehaviour => weaponBehaviour;
+
+		[SerializeField, Required, Find(Destination.AllChildren)]
+		private WeaponPositions weaponPositions;
+		public WeaponPositions WeaponPositions => weaponPositions;
+
+		[SerializeField, Required, Find(Destination.AllChildren)]
+		private UnityEngine.Animator playerAnimator;
+		public UnityEngine.Animator PlayerAnimator => playerAnimator;
 
 		public static async UniTask<PlayerRig> LoadAsync()
 		{

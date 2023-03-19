@@ -6,9 +6,4 @@ namespace Game.Scripts.Gameplay.Services
 	{
 		Transform PlayerTransform { get; }
 	}
-
-	// public interface IPlayerInputConsumerAccessService
-	// {
-	// 	InputConsumer InputConsumer { get; }
-	// }
 }

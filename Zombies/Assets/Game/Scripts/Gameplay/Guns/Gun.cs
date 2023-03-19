@@ -8,28 +8,26 @@ using Sirenix.OdinInspector;
 
 namespace Game.Scripts.Gameplay.Guns
 {
-	public abstract class Gun : MonoBehaviour
+	public abstract class Gun : Weapon
 	{
-		[TitleGroup("References")]
-		[SerializeField, Required, Find(Destination.Ancestors)]
-		private WeaponHoldable weaponHoldable;
-		public WeaponHoldable WeaponHoldable => weaponHoldable;
-		
 		[SerializeField]
 		protected GunConfig gunConfig;
+
 		public GunConfig GunConfig => gunConfig;
 
 		[SerializeField, Required, Find(Destination.Self)]
 		protected Bullet bullet;
 
-		[SerializeField] 
-		private Transform spawnPosition;
-		public Transform SpawnPosition => spawnPosition;
+		[SerializeField]
+		private Transform bulletSpawnPosition;
 
-		private bool canShoot = true;
+		public Transform BulletSpawnPosition => bulletSpawnPosition;
 
-		public Action<GunConfig> OnShoot;
-		public Action OnFinishShoot;
+		public override int WeaponId => gunConfig.WeaponId;
+
+		//public event Action<Ammo> OnAmmoFired;
+		public event Action OnReload;
+		public event Action OnEject;
 
 		protected virtual void Init(GunConfig gunConfig)
 		{
@@ -38,26 +36,8 @@ namespace Game.Scripts.Gameplay.Guns
 			bullet.Init();
 		}
 
-		protected virtual async UniTask Shoot()
-		{
-			if(!canShoot) return;
+		protected abstract UniTask Fire();
 
-			OnShoot?.Invoke(gunConfig);
-			bullet.ResetTransform(SpawnPosition);
-			bullet.Launch(this);
-
-			// TODO: I dont like this arbituary delay, need a better design
-			await UniTask.Delay(TimeSpan.FromSeconds(gunConfig.FireRate.Random()));
-			canShoot = true;
-			OnFinishShoot?.Invoke();
-		}
-
-		protected virtual void Reload()
-		{
-		}
-
-		protected void IsEnabled()
-		{
-		}
+		protected abstract void Reload();
 	}
 }
