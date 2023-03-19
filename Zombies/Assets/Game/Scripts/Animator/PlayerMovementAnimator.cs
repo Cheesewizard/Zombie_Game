@@ -1,4 +1,6 @@
+using Game.Scripts.Gameplay.Player;
 using Game.Scripts.Gameplay.Services;
+using Quack.ReferenceMagic.Runtime;
 using UnityDependencyInjection;
 using UnityEngine;
 
@@ -9,8 +11,8 @@ namespace Game.Scripts.Animator
 		[Inject]
 		private PlayerAnimationAccessService animationAccessService;
 
-		[Inject]
-		private GameplayPlayerAccessService playerAccessService;
+		[SerializeField, Find(Destination.Ancestors)]
+		private PlayerRig playerRig;
 
 		/*
 		 * Implement strategy pattern to do animations, such as pistol strategy, bat strategy etc
@@ -18,8 +20,8 @@ namespace Game.Scripts.Animator
 
 		public void HandleDependencyInjectionComplete()
 		{
-			playerAccessService.PlayerRig.PlayerLogic.OnMovement += HandleMovementAnimation;
-			playerAccessService.PlayerRig.PlayerLogic.OnKilled += HandleDeathAnimation;
+			playerRig.PlayerMovementBehaviour.OnMovement += HandleMovementAnimation;
+			playerRig.PlayerMovementBehaviour.OnKilled += HandleDeathAnimation;
 		}
 
 		private void HandleMovementAnimation(bool isWalking)
@@ -35,8 +37,8 @@ namespace Game.Scripts.Animator
 
 		private void OnDestroy()
 		{
-			playerAccessService.PlayerRig.PlayerLogic.OnMovement -= HandleMovementAnimation;
-			playerAccessService.PlayerRig.PlayerLogic.OnKilled -= HandleDeathAnimation;
+			playerRig.PlayerMovementBehaviour.OnMovement -= HandleMovementAnimation;
+			playerRig.PlayerMovementBehaviour.OnKilled -= HandleDeathAnimation;
 		}
 	}
 }

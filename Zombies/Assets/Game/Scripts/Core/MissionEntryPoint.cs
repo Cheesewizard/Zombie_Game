@@ -5,8 +5,6 @@ using Game.Scripts.Gameplay.Services;
 using Quack.Utils;
 using UnityEngine;
 using Game.Scripts.Core.Loading;
-using Game.Scripts.Gameplay;
-using Game.Scripts.Gameplay.Guns;
 using Game.Scripts.Gameplay.Inventory;
 using Game.Scripts.Gameplay.Player;
 
@@ -40,13 +38,13 @@ namespace Game.Scripts.Core
 				};
 
 				gameSession.DependencyContainer.Add(new GameplayPlayerAccessService(playerRig));
+				gameSession.DependencyContainer.Add(new PlayerAnimationAccessService(playerRig));
 				gameSession.DependencyContainer.Add(new BulletImpactService());
 				gameSession.DependencyContainer.Add(new LoadoutService(loadout));
-				gameSession.DependencyContainer.Add(new PlayerAnimationAccessService(playerRig));
+				playerRig.WeaponBehaviour.Init(loadout);
 				gameSession.Init();
 
 				gameSession.DependencyContainer.InjectToSceneObjects();
-				playerRig.WeaponBehaviour.Init(loadout);
 			}
 			catch (Exception e)
 			{

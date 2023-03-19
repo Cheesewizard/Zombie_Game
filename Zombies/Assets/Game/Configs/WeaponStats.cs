@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Configs
 {
     [Serializable]
-    public class GunStats
+    public class WeaponStats
     {
         [SerializeField]
         private float damage;

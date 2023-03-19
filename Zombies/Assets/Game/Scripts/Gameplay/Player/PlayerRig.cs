@@ -4,6 +4,7 @@ using Game.Scripts.Characters.Player;
 using Quack.ReferenceMagic.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Scripts.Gameplay.Player
 {
@@ -12,8 +13,8 @@ namespace Game.Scripts.Gameplay.Player
 		private const string PLAYER_RIG_PREFAB_PATH = "Characters/Humans/Male/Player_Rig";
 
 		[SerializeField, Required, Find(Destination.AllChildren)]
-		private PlayerLogic playerLogic;
-		public PlayerLogic PlayerLogic => playerLogic;
+		private PlayerMovementBehaviour playerMovementBehaviour;
+		public PlayerMovementBehaviour PlayerMovementBehaviour => playerMovementBehaviour;
 
 		[SerializeField, Required, Find(Destination.AllChildren)]
 		private AbstractPlayerWeaponBehaviour weaponBehaviour;

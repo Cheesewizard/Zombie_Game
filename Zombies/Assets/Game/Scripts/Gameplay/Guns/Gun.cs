@@ -18,11 +18,6 @@ namespace Game.Scripts.Gameplay.Guns
 		[SerializeField, Required, Find(Destination.Self)]
 		protected Bullet bullet;
 
-		[SerializeField]
-		private Transform bulletSpawnPosition;
-
-		public Transform BulletSpawnPosition => bulletSpawnPosition;
-
 		public override int WeaponId => gunConfig.WeaponId;
 
 		//public event Action<Ammo> OnAmmoFired;
@@ -36,7 +31,7 @@ namespace Game.Scripts.Gameplay.Guns
 			bullet.Init();
 		}
 
-		protected abstract UniTask Fire();
+		protected abstract void Fire();
 
 		protected abstract void Reload();
 	}

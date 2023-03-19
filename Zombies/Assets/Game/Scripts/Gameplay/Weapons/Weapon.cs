@@ -12,7 +12,7 @@ namespace Game.Scripts.Gameplay.Weapons
         public event Action<Weapon> OnActivated;
         public event Action<Weapon> OnDeactivated;
 
-        public abstract int  WeaponId { get; }
+        public abstract int WeaponId { get; }
 
         protected abstract void Activate();
         protected abstract void Deactivate();

@@ -1,20 +1,21 @@
 ﻿using Game.Configs;
 using Game.Scripts.Gameplay.Player;
 using Game.Scripts.Gameplay.Services;
+using Quack.ReferenceMagic.Runtime;
 using UnityDependencyInjection;
 using UnityEngine;
 
 namespace Game.Scripts.Animator
 {
-	public class PlayerWeaponAnimator : MonoBehaviour, IDependencyInjectionCompleteHandler
+	public class PlayerWeaponAnimator : MonoBehaviour
 	{
 		[Inject]
 		private PlayerAnimationAccessService animationAccessService;
 
-		[Inject]
+		[SerializeField, Find(Destination.Ancestors)]
 		private AbstractPlayerWeaponBehaviour playerGunBehaviour;
 
-		public void HandleDependencyInjectionComplete()
+		public void Awake()
 		{
 			playerGunBehaviour.WeaponHoldable.onWeaponEquipped += HandleWeaponEquipped;
 		}

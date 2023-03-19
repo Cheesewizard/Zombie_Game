@@ -39,23 +39,23 @@ namespace Game.Configs
 
 		[Title("Stats", "Basic stats for this weapon")]
 		[SerializeField, HideLabel]
-		private GunStats weaponStats;
+		private WeaponStats weaponStats;
 
-		public GunStats Stats => weaponStats;
+		public WeaponStats Stats => weaponStats;
 
 		[SerializeField]
-		private RangedValue fireRate = new RangedValue(0f, 100f);
+		private float fireRate;
 
-		public RangedValue FireRate => fireRate;
+		public float FireRate => fireRate;
 
 		[SerializeField]
 		private float impactForce = 1f;
 
 		public float ImpactForce => impactForce;
 
-		public void SetWeaponLevel(int gunLevel)
+		public void SetWeaponLevel(int weaponLevel)
 		{
-			WeaponLevel = gunLevel;
+			WeaponLevel = weaponLevel;
 		}
 
 		public Weapon InstantiateGun(Transform parent)

@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2baa3f4f4be584da3dc847a851393b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRig: {fileID: 6881955844168960046}
 --- !u!114 &2422928481802896312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31eca549aaab472d9818cbb9e5d338b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerGunBehaviour: {fileID: 9052490931857872404}
 --- !u!1 &2078292338201593119
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +474,7 @@ Transform:
   m_Children:
   - {fileID: 3182777392769308377}
   - {fileID: 5971287628952709482}
-  - {fileID: 8560996009203127340}
+  - {fileID: 6461928758500974279}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -488,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960f15788df8d20459644c887f38e758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLogic: {fileID: 1643281336715543976}
+  playerMovementBehaviour: {fileID: 1643281336715543976}
   weaponBehaviour: {fileID: 9052490931857872404}
   weaponPositions: {fileID: 3299818204214115980}
   playerAnimator: {fileID: 4563802836537575514}
@@ -504,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d61a86657a443dd8efbc2c1119e83a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRig: {fileID: 6881955844168960046}
   weaponHoldable: {fileID: 250289904896404676}
 --- !u!114 &3299818204214115980
 MonoBehaviour:
@@ -764,7 +767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28be505eefe2456688f50f6370426d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &5144419822019719630
+--- !u!1001 &7495964405397764901
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -773,7 +776,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3471030686237690197, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
       propertyPath: m_Name
-      value: Bullet
+      value: PistolBullet
       objectReference: {fileID: 0}
     - target: {fileID: 3578780680242357730, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
       propertyPath: m_RootOrder
@@ -797,11 +800,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3578780680242357730, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3578780680242357730, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3578780680242357730, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
       propertyPath: m_LocalRotation.z
@@ -821,8 +824,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
---- !u!4 &8560996009203127340 stripped
+--- !u!4 &6461928758500974279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3578780680242357730, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
-  m_PrefabInstance: {fileID: 5144419822019719630}
+  m_PrefabInstance: {fileID: 7495964405397764901}
   m_PrefabAsset: {fileID: 0}

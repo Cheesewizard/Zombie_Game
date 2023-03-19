@@ -2,24 +2,21 @@ using System;
 using Game.Configs;
 using Game.Save;
 using Game.Scripts.Core;
-using Game.Scripts.Gameplay.Services;
 using Game.Scripts.Gameplay.Weapons;
 using Quack.ReferenceMagic.Runtime;
 using Sirenix.OdinInspector;
-using UnityDependencyInjection;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Player
 {
 	public abstract class AbstractPlayerWeaponBehaviour : MonoBehaviour
 	{
-		[Inject]
-		private GameplayPlayerAccessService playerAccessService;
+		[SerializeField, Find(Destination.Self)]
+		private PlayerRig playerRig;
 
 		[TitleGroup("References")]
 		[SerializeField, Required, Find(Destination.AllChildren)]
 		private WeaponHoldable weaponHoldable;
-
 		public WeaponHoldable WeaponHoldable => weaponHoldable;
 
 		public Weapon PrimaryWeapon { get; set; }
@@ -41,9 +38,7 @@ namespace Game.Scripts.Gameplay.Player
 
 		private Weapon CreateWeapon(WeaponConfig weaponConfig)
 		{
-			if (playerAccessService == null) return null;
-
-			if (playerAccessService.PlayerRig.WeaponPositions.TryGetPosition(weaponConfig.WeaponId, out var parent))
+			if (playerRig.WeaponPositions.TryGetPosition(weaponConfig.WeaponId, out var parent))
 			{
 				var newWeapon = weaponConfig.InstantiateGun(parent);
 				newWeapon.OnActivated += HandleGunActivated;

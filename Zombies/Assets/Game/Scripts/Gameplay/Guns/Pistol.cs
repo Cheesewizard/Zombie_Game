@@ -1,52 +1,51 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Gameplay.Weapons;
+using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Guns
 {
-    public class Pistol : Gun, IUsableWeapon
-    {
-        public int WeaponId => gunConfig.WeaponId;
+	public class Pistol : Gun, IUsableWeapon
+	{
+		public int WeaponId => gunConfig.WeaponId;
 
-        private bool canShoot = true;
+		private float FireRate => gunConfig.FireRate;
+		private float nextFire = 0f;
 
-        private void Start()
-        {
-            base.Init(gunConfig);
-        }
+		private void Start()
+		{
+			base.Init(gunConfig);
+		}
 
-        public async UniTask PerformAction()
-        {
-            await Fire();
-        }
+		public void PerformAction()
+		{
+			Fire();
+		}
 
-        protected override async UniTask Fire()
-        {
-            if (!canShoot) return;
+		protected override void Fire()
+		{
+			if (Time.time - FireRate < nextFire) return;
+			nextFire = Time.time - Time.deltaTime;
 
-            RaiseUseWeaponEvent(gunConfig);
-            bullet.ResetTransform(BulletSpawnPosition);
-            bullet.Launch(this);
+			RaiseUseWeaponEvent(gunConfig);
+			bullet.ResetTransform(transform);
+			bullet.Launch(this);
+			RaiseFinishWeaponEvent();
+		}
 
-            // TODO: I dont like this arbituary delay, need a better design
-            await UniTask.Delay(TimeSpan.FromSeconds(gunConfig.FireRate.Random()));
-            canShoot = true;
-            RaiseFinishWeaponEvent();
-        }
+		protected override void Reload()
+		{
+			throw new NotImplementedException();
+		}
 
-        protected override void Reload()
-        {
-            throw new NotImplementedException();
-        }
+		protected override void Activate()
+		{
+			RaiseOnActivatedEvent(this);
+		}
 
-        protected override void Activate()
-        {
-            RaiseOnActivatedEvent(this);
-        }
-
-        protected override void Deactivate()
-        {
-            throw new NotImplementedException();
-        }
-    }
+		protected override void Deactivate()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

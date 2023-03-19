@@ -73,7 +73,7 @@ namespace Game.Scripts.Gameplay.Guns
 		{
 			isFlying = false;
 			visualiser.StopDrawLine(hit);
-			//onStopFlying?.Invoke(hit);
+			//onStopFlying?.Invoke(hit);was
 		}
 
 		private void StopFlying(RaycastHit hit)

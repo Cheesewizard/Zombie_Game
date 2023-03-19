@@ -10,10 +10,10 @@ namespace Game.Configs
 
 		private Dictionary<int, Transform> weaponPositions = new();
 
-		private void Start()
+		private void Awake()
 		{
 			// Make it so this can be generated on its own.
-			weaponPositions.Add(0, pistolTransform);
+			weaponPositions.Add(1, pistolTransform);
 		}
 
 		public bool TryGetPosition(int weaponId, out Transform position)

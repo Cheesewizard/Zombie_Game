@@ -17,7 +17,9 @@ namespace Game.Scripts.Gameplay.Guns
 
 		public virtual void ResetTransform(Transform parent)
 		{
-			transform.SetParent(parent);
+			//transform.SetParent(parent);
+
+			transform = parent;
 			transform.localPosition = initPosition;
 			transform.localRotation = initRotation;
 		}

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Characters.Player
 {
-	public class PlayerLogic : MonoBehaviour
+	public class PlayerMovementBehaviour : MonoBehaviour
 	{
 		[Inject]
 		private PlayerInputConsumerAccessService playerInput;
