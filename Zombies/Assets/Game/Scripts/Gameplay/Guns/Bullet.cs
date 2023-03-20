@@ -2,6 +2,7 @@
 using Assets.Scripts.Interfaces;
 using Game.Configs;
 using Game.Scripts.Gameplay.Services;
+using Game.Scripts.Gameplay.Weapons.Ammunition;
 using Game.Scripts.Gameplay.WorldObjects;
 using Game.Scripts.Utils;
 using Game.Utils;
@@ -23,8 +24,6 @@ namespace Game.Scripts.Gameplay.Guns
 		[SerializeField]
 		private float maxPenetrationPower = 100f;
 
-		public ParticleSystem BloodHitEffect => bloodHitEffect;
-
 		public float ImpactForce => impactForce;
 		public Ray Ray => ray;
 
@@ -45,6 +44,11 @@ namespace Game.Scripts.Gameplay.Guns
 
 		[SerializeField, ValueDropdown(OdinDropdowns.WEAPONS)]
 		private int gunSourceID;
+
+		public uint ID { get; private set; }
+		public uint DetonationID { get; private set; }
+
+		private Action<bool> onStopFlying;
 
 		public override void Init()
 		{
@@ -73,7 +77,7 @@ namespace Game.Scripts.Gameplay.Guns
 		{
 			isFlying = false;
 			visualiser.StopDrawLine(hit);
-			//onStopFlying?.Invoke(hit);was
+			onStopFlying?.Invoke(hit);
 		}
 
 		private void StopFlying(RaycastHit hit)
@@ -83,16 +87,17 @@ namespace Game.Scripts.Gameplay.Guns
 			StopFlying(true);
 		}
 
-		public void Launch(Gun gun, Action<bool> onStopFlying = null)
+		public void Launch(Gun gun,  uint detonateID, Action<bool> onStopFlying = null)
 		{
 			firingGun = gun;
 
+			ID = BulletHelper.NextBulletID;
+			DetonationID = detonateID;
 			ray.origin = transform.position;
 			ray.direction = -transform.up;
 			impactForce = gun.GunConfig.ImpactForce;
 			effectiveRange = gun.GunConfig.EffectiveRange;
 			bulletSpeed = gun.GunConfig.BulletSpeed.Random();
-			bloodHitEffect = gun.GunConfig.BloodHitFeedbackPrefab;
 
 			// Detach the bullet from the parent (magazine)
 			transform.DetatchFromParent();

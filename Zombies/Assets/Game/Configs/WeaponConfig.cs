@@ -26,11 +26,6 @@ namespace Game.Configs
 
 		public GameObject Prefab => prefab;
 
-		[Title("Misc", "Some random settings that been dumped here.")]
-		[SerializeField]
-		private ParticleSystem bloodHitFeedbackPrefab;
-
-		public ParticleSystem BloodHitFeedbackPrefab => bloodHitFeedbackPrefab;
 
 		[SerializeField]
 		private int upgradePrice;

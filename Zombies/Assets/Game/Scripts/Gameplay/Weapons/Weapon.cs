@@ -31,5 +31,10 @@ namespace Game.Scripts.Gameplay.Weapons
         {
             OnActivated?.Invoke(weapon);
         }
+
+        protected virtual void RaiseOnDeActivatedEvent(Weapon weapon)
+        {
+            OnDeactivated?.Invoke(weapon);
+        }
     }
 }
