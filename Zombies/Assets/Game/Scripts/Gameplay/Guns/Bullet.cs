@@ -87,11 +87,12 @@ namespace Game.Scripts.Gameplay.Guns
 			StopFlying(true);
 		}
 
-		public void Launch(Gun gun,  uint detonateID, Action<bool> onStopFlying = null)
+		public void Launch(Gun gun, uint detonateID, Action<bool> onStopFlying = null)
 		{
 			firingGun = gun;
 
-			ID = BulletHelper.NextBulletID;
+			//ID = BulletHelper.NextBulletID;
+			this.onStopFlying = onStopFlying;
 			DetonationID = detonateID;
 			ray.origin = transform.position;
 			ray.direction = -transform.up;

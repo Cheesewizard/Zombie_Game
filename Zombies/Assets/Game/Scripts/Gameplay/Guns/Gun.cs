@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
 using Game.Configs;
 using Game.Scripts.Gameplay.Weapons;
-using Quack.ReferenceMagic.Runtime;
-using Sirenix.OdinInspector;
+using Game.Scripts.Gameplay.Weapons.Ammunition;
+using Game.Scripts.Gameplay.Weapons.Magazines;
 
 namespace Game.Scripts.Gameplay.Guns
 {
@@ -15,24 +14,42 @@ namespace Game.Scripts.Gameplay.Guns
 
 		public GunConfig GunConfig => gunConfig;
 
-		[SerializeField, Required, Find(Destination.Self)]
-		protected Bullet bullet;
+		protected abstract Ammo LoadedAmmo { get; }
+
+		public MagazineReloader Reloader;
+		protected Magazine LoadedMagazine { get; set; }
 
 		public override int WeaponId => gunConfig.WeaponId;
 
-		//public event Action<Ammo> OnAmmoFired;
+		public event Action<Ammo> OnAmmoFired;
 		public event Action OnReload;
 		public event Action OnEject;
 
-		protected virtual void Init(GunConfig gunConfig)
+		protected void InitGun(GunConfig gunConfig)
 		{
 			this.gunConfig = gunConfig;
-			//TODO Change this to be part of the pooling system
-			bullet.Init();
+
+			// Could have a player belt, for now though this will do
+			Reloader.Init(GunConfig.MagazineConfig);
+			LoadedMagazine = Reloader.TakeMagazine();
+			//LoadedMagazine.InstantLoad(magazineParent);
 		}
 
 		protected abstract void Fire();
 
 		protected abstract void Reload();
+
+		protected void DetonateLoadedAmmo()
+		{
+			if (LoadedAmmo == null)
+			{
+				Debug.LogError("Cannot detonate a loaded ammo! Ammo is null, somehow.");
+				return;
+			}
+
+			// SFX!
+			LoadedAmmo.Detonate(this);
+			OnAmmoFired?.Invoke(LoadedAmmo);
+		}
 	}
 }

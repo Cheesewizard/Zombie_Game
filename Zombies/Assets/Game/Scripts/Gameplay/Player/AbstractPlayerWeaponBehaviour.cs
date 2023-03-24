@@ -41,6 +41,7 @@ namespace Game.Scripts.Gameplay.Player
 			if (playerRig.WeaponPositions.TryGetPosition(weaponConfig.WeaponId, out var parent))
 			{
 				var newWeapon = weaponConfig.InstantiateGun(parent);
+				newWeapon.Init();
 				newWeapon.OnActivated += HandleGunActivated;
 				newWeapon.OnDeactivated += HandleGunDeactivated;
 				//newGun.OnAmmoFired += HandleAnyGunFired;

@@ -1,6 +1,6 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using Game.Scripts.Gameplay.Weapons;
+using Game.Scripts.Gameplay.Weapons.Ammunition;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Guns
@@ -9,12 +9,16 @@ namespace Game.Scripts.Gameplay.Guns
 	{
 		public int WeaponId => gunConfig.WeaponId;
 
+		protected override Ammo LoadedAmmo => loadedCartridge;
+		private Cartridge loadedCartridge;
+
 		private float FireRate => gunConfig.FireRate;
 		private float nextFire = 0f;
 
-		private void Start()
+		public override void Init()
 		{
-			base.Init(gunConfig);
+			InitGun(gunConfig);
+			TryLoadAmmo();
 		}
 
 		public void PerformAction()
@@ -28,8 +32,7 @@ namespace Game.Scripts.Gameplay.Guns
 			nextFire = Time.time - Time.deltaTime;
 
 			RaiseUseWeaponEvent(gunConfig);
-			bullet.ResetTransform(transform);
-			bullet.Launch(this);
+			DetonateLoadedAmmo();
 			RaiseFinishWeaponEvent();
 		}
 
@@ -46,6 +49,21 @@ namespace Game.Scripts.Gameplay.Guns
 		protected override void Deactivate()
 		{
 			throw new NotImplementedException();
+		}
+
+		protected bool TryLoadAmmo()
+		{
+			//if (isReloading) return false;
+
+			var loadedCartridge = LoadedMagazine.RequestAmmo<Cartridge>();
+			if (loadedCartridge != null)
+			{
+				loadedCartridge.GetLoaded(transform);
+				return true;
+			}
+
+			// SFX
+			return false;
 		}
 	}
 }

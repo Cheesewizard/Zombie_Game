@@ -15,7 +15,6 @@ MonoBehaviour:
   weaponId: 1
   weaponPrefabPath: Guns/Pistol
   prefab: {fileID: 3231198733528832230, guid: e3ad30b4d7195aa4ba1fcc54d50e6912, type: 3}
-  bloodHitFeedbackPrefab: {fileID: 0}
   upgradePrice: 0
   weaponStats:
     damage: 10
@@ -26,6 +25,8 @@ MonoBehaviour:
   gunType: 0
   effectiveRange: 25
   magazineConfig:
+    magazineReference:
+      serializedResourcesPath: Guns/Magazines/Pistol_Magazine
     infiniteAmmo: 0
     totalMagazines: 0
     extraMagazines: 0

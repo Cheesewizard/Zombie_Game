@@ -1,4 +1,6 @@
 ﻿using System;
+using Game.Scripts.Gameplay.Weapons.Magazines;
+using Game.Scripts.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,9 +9,9 @@ namespace Game.Configs
     [Serializable]
     public class MagazineConfig
     {
-        // [SerializeField]
-        // private Magazine magazinePrefab;
-        // public Magazine MagazinePrefab => magazinePrefab;
+        [SerializeField]
+        private MagazineReference magazineReference;
+        public Magazine MagazinePrefab => magazineReference.Magazine;
 
         [SerializeField]
         private bool infiniteAmmo;

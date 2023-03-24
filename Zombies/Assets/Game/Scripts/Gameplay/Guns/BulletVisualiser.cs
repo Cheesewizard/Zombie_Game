@@ -20,7 +20,7 @@ namespace Game.Scripts.Gameplay.Guns
 		private CustomAnimation lineFadeOutAnimation;
 
 		[SerializeField]
-		private Renderer bulletModel;
+		private SpriteRenderer bulletModel;
 
 		private bool hasBulletModel;
 

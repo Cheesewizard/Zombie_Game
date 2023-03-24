@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4680176695938158391}
   - component: {fileID: 6276158808466913043}
+  - component: {fileID: 5498153169542861248}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -45,4 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunConfig: {fileID: 11400000, guid: 1b67098843483664bacc7339ec038978, type: 2}
-  bullet: {fileID: 7801347583383650807, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
+  Reloader: {fileID: 5498153169542861248}
+--- !u!114 &5498153169542861248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231198733528832230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23db1c33463443f95897ee727709990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

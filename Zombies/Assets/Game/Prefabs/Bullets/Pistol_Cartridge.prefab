@@ -84,10 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc8d25dd656405b8940c3477d320d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  caseRigidbody: {fileID: 898102544453484148}
-  caseCleanUpTime: 6
   bullet: {fileID: 6157424569702044745}
   caseRenderer: {fileID: 2303383755039147099}
+  IsLoaded: 0
 --- !u!1001 &3550466275181712071
 PrefabInstance:
   m_ObjectHideFlags: 0

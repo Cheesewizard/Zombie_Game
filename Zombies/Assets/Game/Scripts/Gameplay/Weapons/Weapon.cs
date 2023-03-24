@@ -17,6 +17,8 @@ namespace Game.Scripts.Gameplay.Weapons
         protected abstract void Activate();
         protected abstract void Deactivate();
 
+        public abstract void Init();
+
         protected virtual void RaiseUseWeaponEvent(WeaponConfig weaponConfig)
         {
             OnUseWeapon?.Invoke(weaponConfig);
