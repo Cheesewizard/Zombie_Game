@@ -1,11 +1,10 @@
 ﻿using System;
-using Game.Scripts.Gameplay.Weapons;
 using Game.Scripts.Gameplay.Weapons.Ammunition;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Guns
 {
-	public class Pistol : Gun, IUsableWeapon
+	public class Pistol : Gun
 	{
 		public int WeaponId => gunConfig.WeaponId;
 
@@ -19,28 +18,61 @@ namespace Game.Scripts.Gameplay.Guns
 		{
 			InitGun(gunConfig);
 			TryLoadAmmo();
+			IsReadyToFire = true;
 		}
 
-		public void PerformAction()
+		protected override bool TryUseWeapon()
 		{
-			Fire();
+			if (IsReadyToFire)
+			{
+				Fire();
+				return true;
+			}
+
+			return false;
 		}
 
 		protected override void Fire()
 		{
 			if (Time.time - FireRate < nextFire) return;
 			nextFire = Time.time - Time.deltaTime;
+			IsReadyToFire = false;
 
 			RaiseUseWeaponEvent(gunConfig);
 			DetonateLoadedAmmo();
 			RaiseFinishWeaponEvent();
+			IsReadyToFire = true;
+		}
+		
+		public override void TryToReload()
+		{
+			Reload();
 		}
 
 		protected override void Reload()
 		{
-			throw new NotImplementedException();
+			isReloading = true;
+			LoadMagazine();
+			IsReadyToFire = true;
 		}
+		
+		protected bool TryLoadAmmo()
+		{
+			if (isReloading) return false;
 
+			loadedCartridge = LoadedMagazine.RequestAmmo<Cartridge>();
+			if (loadedCartridge != null)
+			{
+				loadedCartridge.GetLoaded(bulletLaunchPoint);
+				IsReadyToFire = true;
+				isReloading = false;
+				return true;
+			}
+
+			// SFX
+			return false;
+		}
+		
 		protected override void Activate()
 		{
 			RaiseOnActivatedEvent(this);
@@ -49,21 +81,6 @@ namespace Game.Scripts.Gameplay.Guns
 		protected override void Deactivate()
 		{
 			throw new NotImplementedException();
-		}
-
-		protected bool TryLoadAmmo()
-		{
-			//if (isReloading) return false;
-
-			var loadedCartridge = LoadedMagazine.RequestAmmo<Cartridge>();
-			if (loadedCartridge != null)
-			{
-				loadedCartridge.GetLoaded(transform);
-				return true;
-			}
-
-			// SFX
-			return false;
 		}
 	}
 }

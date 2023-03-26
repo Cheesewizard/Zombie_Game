@@ -13,7 +13,7 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines
 
 		public void Init(MagazineConfig magazineConfig)
 		{
-			magazineStack = new MagazineStack(magazineConfig);
+			magazineStack = new MagazineStack(magazineConfig, transform);
 		}
 	}
 }

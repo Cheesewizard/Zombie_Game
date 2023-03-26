@@ -7,22 +7,25 @@ using UnityEngine;
 
 namespace Game.Scripts.Animator
 {
-	public class PlayerWeaponAnimator : MonoBehaviour
+	public class PlayerWeaponAnimator : MonoBehaviour, IDependencyInjectionCompleteHandler
 	{
 		[Inject]
 		private PlayerAnimationAccessService animationAccessService;
 
 		[SerializeField, Find(Destination.Ancestors)]
 		private AbstractPlayerWeaponBehaviour playerGunBehaviour;
-
-		public void Awake()
+		
+		public void HandleDependencyInjectionComplete()
 		{
-			playerGunBehaviour.WeaponHoldable.onWeaponEquipped += HandleWeaponEquipped;
+			playerGunBehaviour.PrimaryHand.OnGrabbed += HandleWeaponEquipped;
 		}
 
-		private void HandleWeaponEquipped()
+		private void HandleWeaponEquipped(IHoldableItem item)
 		{
-			playerGunBehaviour.PrimaryWeapon.OnUseWeapon += HandleShootAnimation;
+			if (item.IsCurrentlyHeld)
+			{
+				playerGunBehaviour.PrimaryWeapon.OnUseWeapon += HandleShootAnimation;
+			}
 		}
 
 		private void HandleShootAnimation(WeaponConfig weaponConfig)

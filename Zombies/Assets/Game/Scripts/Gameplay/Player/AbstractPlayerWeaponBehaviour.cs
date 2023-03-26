@@ -2,9 +2,9 @@ using System;
 using Game.Configs;
 using Game.Save;
 using Game.Scripts.Core;
+using Game.Scripts.Gameplay.Player.Input;
 using Game.Scripts.Gameplay.Weapons;
 using Quack.ReferenceMagic.Runtime;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Player
@@ -14,12 +14,11 @@ namespace Game.Scripts.Gameplay.Player
 		[SerializeField, Find(Destination.Self)]
 		private PlayerRig playerRig;
 
-		[TitleGroup("References")]
-		[SerializeField, Required, Find(Destination.AllChildren)]
-		private WeaponHoldable weaponHoldable;
-		public WeaponHoldable WeaponHoldable => weaponHoldable;
+		[SerializeField, Find(Destination.Self)]
+		private GameplayHand primaryHand;
+		public GameplayHand PrimaryHand => primaryHand;
 
-		public Weapon PrimaryWeapon { get; set; }
+		public Weapon PrimaryWeapon { get; protected set; }
 
 		public virtual void Init(ILoadout loadout)
 		{
@@ -44,7 +43,7 @@ namespace Game.Scripts.Gameplay.Player
 				newWeapon.Init();
 				newWeapon.OnActivated += HandleGunActivated;
 				newWeapon.OnDeactivated += HandleGunDeactivated;
-				//newGun.OnAmmoFired += HandleAnyGunFired;
+				//newWeapon.OnAmmoFired += HandleAnyGunFired;
 				return newWeapon;
 			}
 

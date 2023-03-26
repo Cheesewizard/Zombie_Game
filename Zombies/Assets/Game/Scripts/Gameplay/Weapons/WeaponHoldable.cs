@@ -1,62 +1,23 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
-using Game.Scripts.Gameplay.Services;
-using UnityDependencyInjection;
-using UnityEngine;
-using UnityEngine.InputSystem;
+using Game.Scripts.Gameplay.Player.Input;
 
 namespace Game.Scripts.Gameplay.Weapons
 {
-	public class WeaponHoldable : MonoBehaviour, IWeaponHoldable, IDependencyInjectionCompleteHandler
+	public abstract class WeaponHoldable : ItemHoldableItemAbstract
 	{
-		[Inject]
-		private PlayerInputConsumerAccessService playerInput;
-
-		public IUsableWeapon currentWeapon;
-		public bool CanBeSwapped { get; set; }
-
-		public event Action onWeaponEquipped;
-
-		public void HandleDependencyInjectionComplete()
+		public override void HandleItemGrabbed(GameplayHand hand)
 		{
-			playerInput.InputConsumer.Player.Shoot.performed += HandleShootGun;
+			
 		}
 
-		private void Update()
+		public override void HandleItemReleased(GameplayHand hand)
 		{
-			if (playerInput.InputConsumer.Player.Shoot.IsPressed())
-			{
-				// This is a test, I should move the button logic into an input consumer class for processing there
-				currentWeapon.PerformAction();
-			}
+			
 		}
 
-		public void SetCurrentWeapon(IUsableWeapon newWeapon)
+		public override void HandleGrabProcessStarted(GameplayHand gameplayHand)
 		{
-			currentWeapon = newWeapon;
-			onWeaponEquipped?.Invoke();
+			
 		}
-
-		private void HandleShootGun(InputAction.CallbackContext context)
-		{
-			if (currentWeapon == null) return; // Do we always start with pistol?
-			currentWeapon.PerformAction();
-		}
-
-		private void OnDestroy()
-		{
-			playerInput.InputConsumer.Player.Shoot.performed -= HandleShootGun;
-		}
-	}
-
-	public interface IUsableWeapon
-	{
-		public int WeaponId { get; }
-		public void PerformAction();
-	}
-
-	public interface IWeaponHoldable
-	{
-		public bool CanBeSwapped { get; set; }
 	}
 }

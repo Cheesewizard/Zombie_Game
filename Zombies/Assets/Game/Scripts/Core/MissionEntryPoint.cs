@@ -37,11 +37,11 @@ namespace Game.Scripts.Core
 					Inventory = null
 				};
 
+				playerRig.WeaponBehaviour.Init(loadout);
 				gameSession.DependencyContainer.Add(new GameplayPlayerAccessService(playerRig));
 				gameSession.DependencyContainer.Add(new PlayerAnimationAccessService(playerRig));
 				gameSession.DependencyContainer.Add(new BulletImpactService());
 				gameSession.DependencyContainer.Add(new LoadoutService(loadout));
-				playerRig.WeaponBehaviour.Init(loadout);
 				gameSession.Init();
 
 				gameSession.DependencyContainer.InjectToSceneObjects();

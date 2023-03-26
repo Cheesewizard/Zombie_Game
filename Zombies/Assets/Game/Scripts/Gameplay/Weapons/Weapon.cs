@@ -1,11 +1,17 @@
 ﻿using System;
 using Game.Configs;
+using Quack.ReferenceMagic.Runtime;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Weapons
 {
     public abstract class Weapon : MonoBehaviour
     {
+        [SerializeField, Required, Find(Destination.Self)]
+        private WeaponHoldable weaponHoldable;
+        public WeaponHoldable WeaponHoldable => weaponHoldable;
+        
         // Events
         public event Action<WeaponConfig> OnUseWeapon;
         public event Action OnFinishUseWeapon;

@@ -1,4 +1,5 @@
-﻿using UnityEngine.Pool;
+﻿using UnityEngine;
+using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
 namespace Game.Scripts.Gameplay.Weapons.Magazines
@@ -7,17 +8,19 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines
 	{
 		private Magazine magazine;
 		private ObjectPool<Magazine> magazinePool;
+		private Transform parent;
 
-		public MagazinePool(Magazine magazine, int poolSize)
+		public MagazinePool(Magazine magazine, Transform parent, int poolSize)
 		{
 			this.magazine = magazine;
+			this.parent = parent;
 			magazinePool = new ObjectPool<Magazine>(CreateMagazine, OnGetMagazine, OnReleaseMagazine, OnDestroyMagazine,
-				false, poolSize, 1);
+				false, poolSize, poolSize);
 		}
 
 		private Magazine CreateMagazine()
 		{
-			var magazineClip = Object.Instantiate(magazine);
+			var magazineClip = Object.Instantiate(magazine, parent);
 			magazineClip.Init();
 			return magazineClip;
 		}

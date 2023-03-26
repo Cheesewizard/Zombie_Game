@@ -28,7 +28,7 @@ MonoBehaviour:
     magazineReference:
       serializedResourcesPath: Guns/Magazines/Pistol_Magazine
     infiniteAmmo: 0
-    totalMagazines: 0
+    totalMagazines: 9
     extraMagazines: 0
     magazinePoolSize: 5
   recoilConfig:

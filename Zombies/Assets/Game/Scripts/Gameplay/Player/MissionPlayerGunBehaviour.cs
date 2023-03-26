@@ -1,6 +1,4 @@
 ﻿using Game.Save;
-using Game.Scripts.Gameplay.Weapons;
-using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Player
 {
@@ -13,8 +11,8 @@ namespace Game.Scripts.Gameplay.Player
             if (!loadout.HasPrimaryWeapon) return;
 
             PrimaryWeapon = CreateWeapon(loadout.PrimaryWeaponId);
-            Debug.Log($"Current weapon is {PrimaryWeapon.GetType()}");
-            WeaponHoldable.SetCurrentWeapon(PrimaryWeapon as IUsableWeapon);
+            PrimaryWeapon.WeaponHoldable.CanBeSwapped = true;
+            PrimaryHand.Grab(PrimaryWeapon.WeaponHoldable);
         }
     }
 }

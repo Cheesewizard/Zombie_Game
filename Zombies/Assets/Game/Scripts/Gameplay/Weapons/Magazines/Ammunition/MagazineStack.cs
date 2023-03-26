@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Configs;
-using Quack.ReferenceMagic.Runtime;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Weapons.Magazines.Ammunition
@@ -22,10 +20,10 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines.Ammunition
 
 		private List<int> magazines = new();
 
-		public MagazineStack(MagazineConfig config)
+		public MagazineStack(MagazineConfig config, Transform parent)
 		{
 			magazineConfig = config;
-			magazinePool = new MagazinePool(config.MagazinePrefab, config.MagazinePoolSize);
+			magazinePool = new MagazinePool(config.MagazinePrefab, parent, config.MagazinePoolSize);
 			capacity = config.MagazinePrefab.Capacity;
 			MaxAmmo = TotalAmmoLeft = config.InfiniteAmmo ? -1 : capacity * config.TotalMagazines;
 		}

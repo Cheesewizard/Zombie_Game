@@ -10,10 +10,12 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines
 		// shell physics
 		// Shell despawn timer
 
-		[SerializeField,  Find(Destination.AllChildren)]
+		[SerializeField, Find(Destination.AllChildren)]
 		private Ammo[] serializedAmmo;
 
-		private readonly List<Ammo> ammoPool = new ();
+		private readonly List<Ammo> ammoPool = new();
+
+		private bool isInGun;
 
 		public int AmmoLeft { get; private set; }
 		public int Capacity => serializedAmmo.Length;
@@ -54,6 +56,18 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines
 			// Not enough
 			AmmoLeft = 0;
 			return null;
+		}
+
+		public void InstantLoad(Transform parent)
+		{
+			isInGun = true;
+			ReParent(parent);
+		}
+
+		private void ReParent(Transform target)
+		{
+			gameObject.SetActive(true);
+			transform.SetParent(target, true);
 		}
 	}
 }
