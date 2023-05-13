@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2471703068924797522}
+  - component: {fileID: 4056839775437011617}
   - component: {fileID: 2471703068924797523}
   m_Layer: 0
   m_Name: Pistol_Magazine
@@ -33,6 +34,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &4056839775437011617
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471703068924797524}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &2471703068924797523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,6 +73,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f63a6c9ce78be469e26caa3758c306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAutoPooled: 1
+  autoPoolCapacity: 7
+  ammoPrefab: {fileID: 1950342018985751610, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
   serializedAmmo:
   - {fileID: 4515279142436701697}
   - {fileID: 4515279142436701697}
@@ -55,11 +86,13 @@ MonoBehaviour:
   - {fileID: 4515279142436701697}
   - {fileID: 4515279142436701697}
   - {fileID: 4515279142436701697}
+  rigidbody: {fileID: 4056839775437011617}
 --- !u!1001 &2718062900584542779
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2471703068924797522}
     m_Modifications:
     - target: {fileID: 3471030686237690197, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
@@ -111,6 +144,9 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae39a0e24ca9f524f93843321cd807a2, type: 3}
 --- !u!4 &1446251277785896921 stripped
 Transform:

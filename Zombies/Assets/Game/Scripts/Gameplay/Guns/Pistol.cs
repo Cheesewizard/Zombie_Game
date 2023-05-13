@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Scripts.Gameplay.Player;
 using Game.Scripts.Gameplay.Weapons.Ammunition;
 using UnityEngine;
 
@@ -14,9 +15,9 @@ namespace Game.Scripts.Gameplay.Guns
 		private float FireRate => gunConfig.FireRate;
 		private float nextFire = 0f;
 
-		public override void Init()
+		public override void Init(PlayerBelt belt)
 		{
-			InitGun(gunConfig);
+			InitGun(belt, gunConfig);
 			TryLoadAmmo();
 			IsReadyToFire = true;
 		}
@@ -41,9 +42,9 @@ namespace Game.Scripts.Gameplay.Guns
 			RaiseUseWeaponEvent(gunConfig);
 			DetonateLoadedAmmo();
 			RaiseFinishWeaponEvent();
-			IsReadyToFire = true;
+			HandleOnFireComplete();
 		}
-		
+
 		public override void TryToReload()
 		{
 			Reload();
@@ -52,10 +53,14 @@ namespace Game.Scripts.Gameplay.Guns
 		protected override void Reload()
 		{
 			isReloading = true;
-			LoadMagazine();
-			IsReadyToFire = true;
+			if (LoadMagazine())
+			{
+				IsReadyToFire = true;
+			}
+
+			isReloading = false;
 		}
-		
+
 		protected bool TryLoadAmmo()
 		{
 			if (isReloading) return false;
@@ -72,7 +77,7 @@ namespace Game.Scripts.Gameplay.Guns
 			// SFX
 			return false;
 		}
-		
+
 		protected override void Activate()
 		{
 			RaiseOnActivatedEvent(this);
@@ -81,6 +86,15 @@ namespace Game.Scripts.Gameplay.Guns
 		protected override void Deactivate()
 		{
 			throw new NotImplementedException();
+		}
+
+		// Probably needs moving into the gun class
+		protected void HandleOnFireComplete()
+		{
+			if (TryLoadAmmo())
+			{
+				IsReadyToFire = true;
+			}
 		}
 	}
 }

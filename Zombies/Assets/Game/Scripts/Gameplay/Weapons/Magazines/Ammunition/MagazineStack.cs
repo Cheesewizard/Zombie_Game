@@ -20,12 +20,25 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines.Ammunition
 
 		private List<int> magazines = new();
 
+		private Magazine reservedMagazine;
+
 		public MagazineStack(MagazineConfig config, Transform parent)
 		{
 			magazineConfig = config;
 			magazinePool = new MagazinePool(config.MagazinePrefab, parent, config.MagazinePoolSize);
 			capacity = config.MagazinePrefab.Capacity;
 			MaxAmmo = TotalAmmoLeft = config.InfiniteAmmo ? -1 : capacity * config.TotalMagazines;
+		}
+
+		private Magazine ReserveNextAvailableMagazine()
+		{
+			if (reservedMagazine == null)
+			{
+				reservedMagazine = magazinePool.RequestNext();
+				reservedMagazine.ResetTransforms();
+			}
+
+			return reservedMagazine;
 		}
 
 		private void CreateStack()
@@ -35,11 +48,6 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines.Ammunition
 			{
 				magazines.Add(i);
 			}
-		}
-
-		public void AdjustAmount(int amount)
-		{
-
 		}
 
 		public void AddAmmo(int amount)
@@ -53,19 +61,25 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines.Ammunition
 
 		public Magazine TakeMagazine()
 		{
-			var magazine = magazinePool.RequestNext();
+			var magazine = reservedMagazine;
+			if (magazine == null)
+			{
+				magazine = ReserveNextAvailableMagazine();
+			}
 
 			var refillAmount = TotalAmmoLeft < capacity ? TotalAmmoLeft : capacity;
 			TotalAmmoLeft -= refillAmount;
+
+			reservedMagazine = null;
 
 			magazine.ModifyAmmoLeft(refillAmount);
 
 			return magazine;
 		}
 
-		public void AddMagazine()
+		public void Dispose()
 		{
-
+			magazinePool.Dispose();
 		}
 	}
 }

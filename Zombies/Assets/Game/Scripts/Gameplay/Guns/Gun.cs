@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 using Game.Configs;
+using Game.Scripts.Gameplay.Player;
 using Game.Scripts.Gameplay.Weapons;
 using Game.Scripts.Gameplay.Weapons.Ammunition;
 using Game.Scripts.Gameplay.Weapons.Magazines;
 using Quack.ReferenceMagic.Runtime;
-using Sirenix.OdinInspector;
+using Sirenix.OdinInspector; 
 
 namespace Game.Scripts.Gameplay.Guns
 {
@@ -23,8 +24,8 @@ namespace Game.Scripts.Gameplay.Guns
 		private Transform magazineParent;
 
 		protected abstract Ammo LoadedAmmo { get; }
-
-		public MagazineReloader Reloader;
+		
+		public MagazineReloader magazineReloader;
 		protected Magazine LoadedMagazine { get; set; }
 
 		public override int WeaponId => gunConfig.WeaponId;
@@ -45,13 +46,12 @@ namespace Game.Scripts.Gameplay.Guns
 		public event Action OnReload;
 		public event Action OnEject;
 
-		protected void InitGun(GunConfig gunConfig)
+		protected void InitGun(PlayerBelt belt, GunConfig gunConfig)
 		{
 			this.gunConfig = gunConfig;
 
-			// Could have a player belt, for now though this will do
-			Reloader.Init(GunConfig.MagazineConfig);
-			LoadedMagazine = Reloader.TakeMagazine();
+			magazineReloader = belt.CreateReloader(name, WeaponId, GunConfig.MagazineConfig, transform);
+			LoadedMagazine = magazineReloader.TakeMagazine();
 			LoadedMagazine.InstantLoad(magazineParent);
 		}
 		
@@ -87,7 +87,7 @@ namespace Game.Scripts.Gameplay.Guns
 		{
 			if (!CanBeReloaded) return false;
 			
-			LoadedMagazine = Reloader.TakeMagazine();
+			LoadedMagazine = magazineReloader.TakeMagazine();
 			LoadedMagazine.InstantLoad(magazineParent);
 			OnReload?.Invoke(); 
 			// SFX: insert mag

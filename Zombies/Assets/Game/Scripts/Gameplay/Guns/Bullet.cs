@@ -91,9 +91,9 @@ namespace Game.Scripts.Gameplay.Guns
 		{
 			firingGun = gun;
 
-			//ID = BulletHelper.NextBulletID;
-			this.onStopFlying = onStopFlying;
+			ID = BulletHelper.NextBulletID;
 			DetonationID = detonateID;
+			this.onStopFlying = onStopFlying;
 			ray.origin = transform.position;
 			ray.direction = -transform.up;
 			impactForce = gun.GunConfig.ImpactForce;

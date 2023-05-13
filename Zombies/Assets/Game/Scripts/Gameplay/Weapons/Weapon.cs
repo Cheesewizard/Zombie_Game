@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Configs;
+using Game.Scripts.Gameplay.Player;
 using Quack.ReferenceMagic.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Game.Scripts.Gameplay.Weapons
         protected abstract void Activate();
         protected abstract void Deactivate();
 
-        public abstract void Init();
+        public abstract void Init(PlayerBelt belt);
 
         protected virtual void RaiseUseWeaponEvent(WeaponConfig weaponConfig)
         {

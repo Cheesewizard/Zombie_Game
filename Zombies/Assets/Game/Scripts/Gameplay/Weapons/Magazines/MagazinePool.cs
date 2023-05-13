@@ -6,21 +6,22 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines
 {
 	public class MagazinePool
 	{
-		private Magazine magazine;
 		private ObjectPool<Magazine> magazinePool;
+		private Magazine prefab;
 		private Transform parent;
 
-		public MagazinePool(Magazine magazine, Transform parent, int poolSize)
+		public MagazinePool(Magazine prefab, Transform parent, int poolSize)
 		{
-			this.magazine = magazine;
+			this.prefab = prefab;
 			this.parent = parent;
+			
 			magazinePool = new ObjectPool<Magazine>(CreateMagazine, OnGetMagazine, OnReleaseMagazine, OnDestroyMagazine,
-				false, poolSize, poolSize);
+				true, poolSize);
 		}
 
 		private Magazine CreateMagazine()
 		{
-			var magazineClip = Object.Instantiate(magazine, parent);
+			var magazineClip = Object.Instantiate(prefab, parent);
 			magazineClip.Init();
 			return magazineClip;
 		}
@@ -50,7 +51,7 @@ namespace Game.Scripts.Gameplay.Weapons.Magazines
 			magazinePool.Release(magazine);
 		}
 
-		private void Dispose()
+		public void Dispose()
 		{
 			magazinePool.Dispose();
 		}

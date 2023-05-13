@@ -31,21 +31,21 @@ namespace Game.Scripts.Gameplay.Weapons
 
 		private void HandleGunFired()
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
-		
+
 		public override void UpdateInput(PlayerInputConsumerAccessService playerInput)
 		{
 			if (playerInput.InputConsumer.Player.Shoot.IsPressed())
 			{
+				Debug.Log("Firing Input");
 				gun.UpdateTrigger();
-				Debug.Log("Firing");
 			}
-			
+
 			if (playerInput.InputConsumer.Player.Reload.WasPressedThisFrame())
 			{
+				Debug.Log("Reloading Input");
 				gun.TryToReload();
-				Debug.Log("Reloading");
 			}
 		}
 

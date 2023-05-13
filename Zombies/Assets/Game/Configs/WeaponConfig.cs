@@ -59,8 +59,7 @@ namespace Game.Configs
 			if (weapon == null)
 				throw new NullReferenceException($"Failed to instantiate gun from resources, path: {weaponPrefabPath}");
 
-			Instantiate(weapon, parent, false);
-			return weapon.GetComponent<Weapon>();
+			return Instantiate(weapon, parent, false).GetComponent<Weapon>();
 		}
 	}
 }

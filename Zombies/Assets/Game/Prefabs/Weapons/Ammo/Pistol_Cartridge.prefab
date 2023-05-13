@@ -10,15 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 3578780680242357730}
   - component: {fileID: 898102544453484148}
-  - component: {fileID: 515173104296535966}
   - component: {fileID: 1950342018985751610}
+  - component: {fileID: 8970322838360023764}
   m_Layer: 11
   m_Name: Pistol_Cartridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3578780680242357730
 Transform:
   m_ObjectHideFlags: 0
@@ -43,7 +43,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3471030686237690197}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -52,26 +52,16 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &515173104296535966
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3471030686237690197}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
 --- !u!114 &1950342018985751610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,17 +76,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6157424569702044745}
   caseRenderer: {fileID: 2303383755039147099}
+  caseRigidbody: {fileID: 898102544453484148}
   IsLoaded: 0
+--- !u!70 &8970322838360023764
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471030686237690197}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.1, y: 0.02}
+  m_Direction: 1
 --- !u!1001 &3550466275181712071
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 3578780680242357730}
     m_Modifications:
+    - target: {fileID: 1019023930155912807, guid: 8f46f2bce9b68e94abf99d2c14cc2b95, type: 3}
+      propertyPath: bulletModel
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2848993765776778234, guid: 8f46f2bce9b68e94abf99d2c14cc2b95, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848993765776778234, guid: 8f46f2bce9b68e94abf99d2c14cc2b95, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0913
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848993765776778234, guid: 8f46f2bce9b68e94abf99d2c14cc2b95, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.016
       objectReference: {fileID: 0}
     - target: {fileID: 2848993765776778234, guid: 8f46f2bce9b68e94abf99d2c14cc2b95, type: 3}
       propertyPath: m_LocalPosition.x
@@ -143,6 +182,12 @@ PrefabInstance:
       value: Bullet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8468860816165896137, guid: 8f46f2bce9b68e94abf99d2c14cc2b95, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2303383755039147099}
   m_SourcePrefab: {fileID: 100100000, guid: 8f46f2bce9b68e94abf99d2c14cc2b95, type: 3}
 --- !u!4 &1642796782974447933 stripped
 Transform:

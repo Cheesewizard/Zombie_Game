@@ -5,6 +5,7 @@ using Game.Scripts.Core;
 using Game.Scripts.Gameplay.Player.Input;
 using Game.Scripts.Gameplay.Weapons;
 using Quack.ReferenceMagic.Runtime;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.Player
@@ -17,6 +18,9 @@ namespace Game.Scripts.Gameplay.Player
 		[SerializeField, Find(Destination.Self)]
 		private GameplayHand primaryHand;
 		public GameplayHand PrimaryHand => primaryHand;
+		
+		[SerializeField, Required, Find(Destination.AllChildren)]
+		protected PlayerBelt belt;
 
 		public Weapon PrimaryWeapon { get; protected set; }
 
@@ -40,7 +44,7 @@ namespace Game.Scripts.Gameplay.Player
 			if (playerRig.WeaponPositions.TryGetPosition(weaponConfig.WeaponId, out var parent))
 			{
 				var newWeapon = weaponConfig.InstantiateGun(parent);
-				newWeapon.Init();
+				newWeapon.Init(belt);
 				newWeapon.OnActivated += HandleGunActivated;
 				newWeapon.OnDeactivated += HandleGunDeactivated;
 				//newWeapon.OnAmmoFired += HandleAnyGunFired;
